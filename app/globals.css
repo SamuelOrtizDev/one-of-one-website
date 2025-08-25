@@ -3,6 +3,8 @@
 @theme {
   --color-blue-100: #6DB3D1;
   --color-blue-200: #0F6083;
+  --color-oOrange-100: #FFA642;
+  --color-oOrange-200: #FF7017;
 }
 
 body {
