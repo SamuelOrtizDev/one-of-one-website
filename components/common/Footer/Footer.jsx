@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image"
 import Link from "next/link"
 import logo from "../Navbar/assets/logo.svg"
@@ -5,10 +6,14 @@ import facebook from "./assets/Facebook-Icon.svg"
 import linkedin from "./assets/LinkedIn-Icon.svg"
 import twitter from "./assets/Twitter-Icon.svg"
 import youtube from "./assets/Youtube-Icon.svg"
+import { usePathname } from "next/navigation"
 
 export default function Footer() {
-    return (
-        <footer className="bg-gradient-to-r from-[#F9FCFD] via-[#E6F3F8] to-[#F9FCFD] border-t border-blue-200/20">
+
+    const path = usePathname()
+
+    if (path != "/create-your-inspiration") return (
+        <footer className="bg-gradient-to-r from-[#F9FCFD] via-[#E6F3F8] to-[#F9FCFD] border-t border-blue-200/20" >
             <div className="flex justify-evenly flex-wrap md:grid grid-cols-3 gap-12 mx-auto w-full max-w-[1800px] py-10 px-7 md:px-[72px] text-blue-200 items-center">
                 <Link href="/">
                     <Image src={logo} alt="OneOfOne Logo" className="max-w-[300px]" />
