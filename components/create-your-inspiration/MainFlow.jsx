@@ -1,12 +1,13 @@
 'use client'
 import SectionLayout from "../common/SectionLayout";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { ArrowRight } from "../common/Icons";
 import { AnimatePresence, motion } from "framer-motion";
 import { Step1 } from "./steps/Step1";
 import sign from "./assets/sign.svg"
 import Image from "next/image";
-import Link from "next/link";
+import { Step2 } from "./steps/Step2";
+import { Step3 } from "./steps/Step3";
 
 export function MainFlow() {
 
@@ -15,7 +16,7 @@ export function MainFlow() {
     const [step, setStep] = useState(initialStep)
     const [userChoice, setUserChoice] = useState({
         quote: "",
-        imageUrl: "",
+        imageUrl: null,
         orientation: "",
         quotePosition: "",
         font: "",
@@ -27,7 +28,7 @@ export function MainFlow() {
     const isStepValid = useMemo(() => {
         switch (step) {
             case 1: return userChoice.quote.trim() !== "";
-            case 2: return userChoice.imageUrl.trim() !== "";
+            case 2: return userChoice.imageUrl !== null;
             case 3: return userChoice.orientation.trim() !== "" && userChoice.quotePosition.trim() !== "";
             case 4: return userChoice.font.trim() !== "";
             case 5: return userChoice.material.trim() !== "" && userChoice.size.trim() !== "";
@@ -42,6 +43,10 @@ export function MainFlow() {
     const previuosStep = () => {
         setStep(step - 1)
     }
+
+    // useEffect(() => {
+    //     console.log(userChoice);
+    // }, [userChoice])
 
     return (
         <SectionLayout containerClasses="bg-gradient-to-b from-white to-[#76B8D6]" className='min-h-screen text-blue-200'>
@@ -82,15 +87,17 @@ export function MainFlow() {
                         transition={{ duration: 0.4 }}>
 
                         {step === 1 && <Step1 userChoice={userChoice} setUserChoice={setUserChoice} />}
+                        {step === 2 && <Step2 userChoice={userChoice} setUserChoice={setUserChoice} />}
+                        {step === 3 && <Step3 userChoice={userChoice} setUserChoice={setUserChoice} />}
 
                     </motion.div>
                 </AnimatePresence>
 
                 {/* Control Buttons */}
-                <span className="flex items-center gap-2">
+                <span className="flex items-center justify-between md:justify-start gap-2">
                     {
                         step != initialStep &&
-                        <button onClick={previuosStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 px-8 py-2 bg-gradient-to-r from-blue-200 to-blue-100 group flex flex-row-reverse items-center gap-4 text-white h-fit">
+                        <button onClick={previuosStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-blue-200 to-blue-100 group flex flex-row-reverse items-center gap-4 text-white h-fit">
                             Back
                             <span className="group-hover:-translate-x-1 transition-transform rotate-180">
                                 <ArrowRight />
@@ -100,7 +107,7 @@ export function MainFlow() {
 
                     {
                         step != totalSteps &&
-                        <button disabled={!isStepValid} onClick={nextStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 px-8 py-2 bg-gradient-to-r from-oOrange-100 to-oOrange-200 group flex items-center gap-4 text-white h-fit disabled:saturate-0 disabled:cursor-not-allowed">
+                        <button disabled={!isStepValid} onClick={nextStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-oOrange-100 to-oOrange-200 group flex items-center gap-4 text-white h-fit disabled:saturate-0 disabled:cursor-not-allowed">
                             Continue
                             <span className="group-hover:translate-x-1 transition-transform">
                                 <ArrowRight />
