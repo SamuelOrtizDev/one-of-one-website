@@ -73,7 +73,7 @@ export function Step3({ setUserChoice, userChoice }) {
                 {
                     orientationOptions.map(({ label, value }) => (
                         <li key={value}>
-                            <button onClick={() => selectOrientation(value)} className={`${userChoice.orientation === value ? "border-blue-200 shadow-lg shadow-blue-100/60 font-bold text-blue-200" : "cursor-pointer transition-all shadow-md hover:shadow-lg hover:-translate-y-1 border-blue-200/20"} border-2 grid place-items-center rounded-xl ${value === "portrait" ? "aspect-[3/4] w-[70px] md:w-[130px]" : "aspect-video h-[70px] md:h-[130px]"}`}>
+                            <button onClick={() => selectOrientation(value)} className={`${userChoice.orientation === value ? "border-blue-200 shadow-lg shadow-blue-100/60 font-bold text-blue-200" : "cursor-pointer transition-all shadow-md hover:shadow-lg hover:-translate-y-1 border-blue-200/20"} border-2 grid place-items-center rounded-xl ${value === "portrait" ? "aspect-[3/4] w-[70px] md:w-[130px]" : "aspect-[4/3] h-[70px] md:h-[130px]"}`}>
                                 {label}
                             </button>
                         </li>
