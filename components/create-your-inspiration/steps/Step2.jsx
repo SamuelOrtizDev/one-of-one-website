@@ -93,7 +93,7 @@ export function Step2({ setUserChoice, userChoice }) {
                         }} ref={inputRef} />
 
                         <button onClick={() => inputRef.current.click()} className="rounded-full bg-blue-100/20 font-bold text-blue-200 px-3 py-1 cursor-pointer transition-colors hover:bg-blue-200 hover:text-white">Choose a file</button>
-                        <small>Note: upload images with a minimum of 1920px to ensure high quality</small>
+                        <small className="text-center">Note: upload images with a minimum of 1920px to ensure high quality</small>
                     </>
                 }
 
