@@ -10,6 +10,7 @@ import { Step3 } from "./steps/Step3";
 import { Step4 } from "./steps/Step4";
 import { Step5 } from "./steps/Step5";
 import { FinalStep } from "./steps/FinalStep";
+import { getProducts } from "@/lib/getProduct";
 
 export function MainFlow() {
 
@@ -47,14 +48,10 @@ export function MainFlow() {
         setStep(step - 1)
     }
 
-    useEffect(() => {
-        console.log(userChoice);
-    }, [userChoice])
-
     return (
         <div className={`bg-white md:bg-gradient-to-b ${isFinalStep ? "from-[#FFE9CA] to-[#FFA943]" : "from-white to-[#76B8D6]"} bg-cover bg-center`}>
             <section className='min-h-screen text-blue-200 mx-auto max-w-[1600px] px-7 md:px-[72px] py-12 md:py-20'>
-                <div className={`rounded-2xl bg-white relative mt-12 ${isFinalStep ? "w-fit mx-auto md:px-12 py-8" : "w-full md:p-8"}`}>
+                <div className={`rounded-2xl bg-white relative mt-12 ${isFinalStep ? "w-fit mx-auto md:px-12 py-2 md:py-8" : "w-full md:p-8"}`}>
 
                     {/* Simple Steps Slider */}
                     {
