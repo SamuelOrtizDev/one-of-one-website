@@ -1,10 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Raleway:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Anton&family=Luckiest+Guy&family=Bangers&family=Lilita+One&family=Alegreya+Sans:wght@400;500;700&family=Dancing+Script:wght@400;700&family=Kalam:wght@400;700&family=Great+Vibes&family=Satisfy&family=Orbitron:wght@400;700;900&family=Chewy&family=League+Spartan:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
 @import "tailwindcss";
+
 
 @theme {
   --color-blue-100: #6DB3D1;
   --color-blue-200: #0F6083;
   --color-oOrange-100: #FFA642;
   --color-oOrange-200: #FF7017;
+
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-raleway: 'Raleway', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --font-anton: 'Anton', sans-serif;
+  --font-luckiest-guy: 'Luckiest Guy', cursive;
+  --font-bangers: 'Bangers', cursive;
+  --font-lilita-one: 'Lilita One', sans-serif;
+  --font-alegreya-sans: 'Alegreya Sans', sans-serif;
+  --font-times: 'Times New Roman', serif;
+  --font-dancing-script: 'Dancing Script', cursive;
+  --font-kalam: 'Kalam', cursive;
+  --font-great-vibes: 'Great Vibes', cursive;
+  --font-satisfy: 'Satisfy', cursive;
+  --font-orbitron: 'Orbitron', sans-serif;
+  --font-chewy: 'Chewy', cursive;
+  --font-league-spartan: 'League Spartan', sans-serif;
+  --font-stencil: 'Stencil', serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-quicksand: 'Quicksand', sans-serif;
 }
 
 body {
