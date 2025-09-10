@@ -1,15 +1,17 @@
 'use client'
 import { getProducts } from "@/lib/getProduct";
-import { quotePositions } from "./Step3"
 import { useState, useEffect } from "react";
 import findProductVariant from "@/lib/findProductVariant";
 import { checkout } from "@/lib/checkout";
 import { createPermanentImageURL } from "@/lib/createPermanentImageURL";
 import { Loader } from "@/components/common/Icons";
+import { quotePositions } from "@/const/quotePositions";
+import { fontOptions } from "@/const/fonts";
 
 export function FinalStep({ userChoice }) {
 
     const selectedQuotePosition = quotePositions.find(quote => quote.value === userChoice.quotePosition)
+    const selectedFont = fontOptions.find(font => font.name === userChoice.font)
 
     const [textColor, setTextColor] = useState('text-white');
     const [imageUrl, setImageUrl] = useState('');
@@ -133,7 +135,7 @@ export function FinalStep({ userChoice }) {
                     ? "aspect-[4/3] w-full lg:h-[380px] lg:w-auto"
                     : "aspect-[3/4] w-full lg:w-[380px] h-auto"
                     } bg-cover bg-center rounded-xl p-6 ${userChoice.frame ? "border-4 border-amber-700" : ""
-                    } flex ${selectedQuotePosition.position}`}
+                    } flex ${selectedFont.className} ${selectedQuotePosition.position}`}
             >
                 <p className={`font-bold text-3xl ${textColor}`}>{userChoice.quote}</p>
             </div>
