@@ -21,43 +21,13 @@ query Product {
 `
 
 export const cartCreateMutation = `
-  mutation CartCreate(
-    $variant: ID!, 
-    $imageUrl: String!, 
-    $quote: String!, 
-    $quotePosition: String!, 
-    $orientation: String!, 
-    $font: String!
-  ) {
+  mutation CartCreate($variant: ID!, $attributes: [AttributeInput!]!) {
     cartCreate(input: {
-      lines: [
-        {
-          merchandiseId: $variant,
-          quantity: 1,
-          attributes: [
-            {
-              key: "Image URL",
-              value: $imageUrl
-            },
-            {
-              key: "Customized Quote",
-              value: $quote
-            },
-            {
-              key: "Quote Position",
-              value: $quotePosition
-            },
-            {
-              key: "Orientation",
-              value: $orientation
-            },
-            {
-              key: "Font",
-              value: $font
-            }
-          ]
-        } 
-      ]
+      lines: [{
+        merchandiseId: $variant,
+        quantity: 1,
+        attributes: $attributes
+      }]
     }) {
       cart {
         checkoutUrl

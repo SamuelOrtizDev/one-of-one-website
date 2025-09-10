@@ -106,7 +106,8 @@ export function FinalStep({ userChoice }) {
                 quote: userChoice.quote,
                 quotePosition: userChoice.quotePosition,
                 orientation: userChoice.orientation,
-                font: userChoice.font
+                font: userChoice.font,
+                frameColor: userChoice.frameColor,
             }
 
             const url = await checkout(variant.id, checkoutOrder);
@@ -154,6 +155,7 @@ export function FinalStep({ userChoice }) {
                     <li><strong className="font-bold text-blue-200">Material:</strong> {userChoice.material}</li>
                     <li><strong className="font-bold text-blue-200">Size:</strong> {userChoice.size}</li>
                     <li><strong className="font-bold text-blue-200">Frame:</strong> {userChoice.frame ? "Yes" : "No"}</li>
+                    {userChoice.frame && <li><strong className="font-bold text-blue-200">Frame Color:</strong> {userChoice.frameColor}</li>}
                 </ul>
 
                 <button disabled={isLoading} onClick={handleBuy} className="rounded-full font-bold transition-color ease-in-out duration-300 cursor-pointer hover:brightness-125 md:px-8 px-4 py-2 bg-gradient-to-r from-oOrange-100 to-oOrange-200 flex items-center justify-between gap-4 text-white h-fit mt-auto disabled:saturate-0 disabled:cursor-not-allowed">

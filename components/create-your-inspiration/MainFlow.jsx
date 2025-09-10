@@ -10,7 +10,6 @@ import { Step3 } from "./steps/Step3";
 import { Step4 } from "./steps/Step4";
 import { Step5 } from "./steps/Step5";
 import { FinalStep } from "./steps/FinalStep";
-import { getProducts } from "@/lib/getProduct";
 
 export function MainFlow() {
 
@@ -26,7 +25,8 @@ export function MainFlow() {
         font: "",
         material: "",
         size: '12" × 16"',
-        frame: false
+        frame: false,
+        frameColor: ""
     })
 
     const isStepValid = useMemo(() => {
@@ -35,7 +35,7 @@ export function MainFlow() {
             case 2: return userChoice.imageUrl !== null;
             case 3: return userChoice.orientation.trim() !== "" && userChoice.quotePosition.trim() !== "";
             case 4: return userChoice.font.trim() !== "";
-            case 5: return userChoice.material.trim() !== "" && userChoice.size.trim() !== "";
+            case 5: return userChoice.material.trim() !== "" && userChoice.size.trim() !== "" && (!userChoice.frame || userChoice.frameColor.trim() !== "");
             default: return false;
         }
     }, [step, userChoice]);
@@ -48,8 +48,12 @@ export function MainFlow() {
         setStep(step - 1)
     }
 
+    // useEffect(() => {
+    //     console.log(userChoice);
+    // }, [userChoice])
+
     return (
-        <div className={`bg-white md:bg-gradient-to-b ${isFinalStep ? "from-[#FFE9CA] to-[#FFA943]" : "from-white to-[#76B8D6]"} bg-cover bg-center`}>
+        <div className={`bg-white transition-all md:bg-gradient-to-b ${isFinalStep ? "from-[#FFE9CA] to-[#FFA943]" : "from-white to-[#76B8D6]"} bg-cover bg-center`}>
             <section className='min-h-screen text-blue-200 mx-auto max-w-[1600px] px-7 md:px-[72px] py-12 md:py-20'>
                 <div className={`rounded-2xl bg-white relative mt-12 ${isFinalStep ? "w-fit mx-auto md:px-12 py-2 md:py-8" : "w-full md:p-8"}`}>
 

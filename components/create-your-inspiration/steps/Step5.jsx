@@ -16,10 +16,23 @@ export function Step5({ setUserChoice, userChoice }) {
         },
     ]
 
+    const frameColors = [
+        "Black",
+        "Red",
+        "Brown"
+    ]
+
     const selectMaterial = (value) => {
         setUserChoice(prev => ({
             ...prev,
             material: value
+        }))
+    }
+
+    const selectFrameColor = (value) => {
+        setUserChoice(prev => ({
+            ...prev,
+            frameColor: value
         }))
     }
 
@@ -49,13 +62,39 @@ export function Step5({ setUserChoice, userChoice }) {
 
             <div className="md:py-6 pt-4 pb-6 border-b border-blue-100/40 flex flex-row md:flex-row items-center gap-4">
                 <p>Pick your favorite size:</p>
-                <Select setUserChoice={setUserChoice} userChoice={userChoice}/>
+                <Select setUserChoice={setUserChoice} userChoice={userChoice} />
             </div>
 
             <label className="flex items-center gap-2 py-4 md:py-6 w-fit">
                 <input checked={userChoice.frame} onChange={handleFrame} type="checkbox" className="size-6 border-2 border-blue-200 rounded-xs focus:ring-blue-200 focus:ring-2 accent-blue-200" />
                 <p>Add a Frame</p>
             </label>
+
+            <AnimatePresence>
+                {
+                    userChoice.frame &&
+                    <motion.span
+                        initial={{ y: -20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -20, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className=" flex flex-col gap-4 -mt-4 mb-4"
+                    >
+                        Choose your frame color:
+                        <ul className="flex items-end gap-3 md:gap-6">
+                            {
+                                frameColors.map(color => (
+                                    <li key={color}>
+                                        <button onClick={() => selectFrameColor(color)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.frameColor === color ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                                            {color}
+                                        </button>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </motion.span>
+                }
+            </AnimatePresence>
         </div>
     )
 }
