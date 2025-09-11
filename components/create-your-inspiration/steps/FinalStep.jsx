@@ -7,11 +7,13 @@ import { createPermanentImageURL } from "@/lib/createPermanentImageURL";
 import { Loader } from "@/components/common/Icons";
 import { quotePositions } from "@/const/quotePositions";
 import { fontOptions } from "@/const/fonts";
+import { frameColors } from "@/const/frameColor";
 
 export function FinalStep({ userChoice }) {
 
     const selectedQuotePosition = quotePositions.find(quote => quote.value === userChoice.quotePosition)
     const selectedFont = fontOptions.find(font => font.name === userChoice.font)
+    const selectedFrameColor = frameColors.find(color => color.color === userChoice.frameColor)
 
     const [textColor, setTextColor] = useState('text-white');
     const [imageUrl, setImageUrl] = useState('');
@@ -126,17 +128,19 @@ export function FinalStep({ userChoice }) {
         }
     }
 
+    useEffect(() => {console.log(selectedFrameColor)}, [])
+
     return (
         <div className="flex flex-col justify-center lg:flex-row gap-8 md:gap-12 text-[#072E3F] mx-auto max-w-6xl">
             <div
                 style={{
                     backgroundImage: `url(${imageUrl})`,
+                    border: `8px solid ${selectedFrameColor.value || 'transparent'}`
                 }}
                 className={`${userChoice.orientation === "landscape"
                     ? "aspect-[4/3] w-full lg:h-[380px] lg:w-auto"
                     : "aspect-[3/4] w-full lg:w-[380px] h-auto"
-                    } bg-cover bg-center rounded-xl p-6 ${userChoice.frame ? "border-4 border-amber-700" : ""
-                    } flex ${selectedFont.className} ${selectedQuotePosition.position}`}
+                    } bg-cover bg-center rounded-xl p-6 flex ${selectedFont.className} ${selectedQuotePosition.position}`}
             >
                 <p className={`font-bold text-3xl ${textColor}`}>{userChoice.quote}</p>
             </div>

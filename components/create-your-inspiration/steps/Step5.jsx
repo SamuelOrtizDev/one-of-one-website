@@ -1,7 +1,8 @@
 'use client'
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown } from "@/components/common/Icons"
+import { CheckIcon, ChevronDown } from "@/components/common/Icons"
+import { frameColors } from "@/const/frameColor"
 
 export function Step5({ setUserChoice, userChoice }) {
 
@@ -14,12 +15,6 @@ export function Step5({ setUserChoice, userChoice }) {
             label: "Premium Luster",
             value: "premium-luster"
         },
-    ]
-
-    const frameColors = [
-        "Black",
-        "Red",
-        "Brown"
     ]
 
     const selectMaterial = (value) => {
@@ -83,10 +78,12 @@ export function Step5({ setUserChoice, userChoice }) {
                         Choose your frame color:
                         <ul className="flex items-end gap-3 md:gap-6">
                             {
-                                frameColors.map(color => (
+                                frameColors.map(({color, value}) => (
                                     <li key={color}>
-                                        <button onClick={() => selectFrameColor(color)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.frameColor === color ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
-                                            {color}
+                                        <button onClick={() => selectFrameColor(color)} style={{backgroundColor: value}} className={`aspect-square grid place-items-center size-8 rounded-lg ${userChoice.frameColor === color ? "ring-2 ring-blue-200 ring-offset-2 " : "hover:shadow-md transition-all cursor-pointer"} ${color === "White" ? "border border-blue-200" : ""}`}>
+                                            {
+                                                userChoice.frameColor === color && <span className={color === "White" ? "text-blue-200" : "text-white"}><CheckIcon/></span>
+                                            }
                                         </button>
                                     </li>
                                 ))
