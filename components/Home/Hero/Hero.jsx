@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function Hero() {
     return (
-        <SectionLayout style={{backgroundImage: `url(${heroBg.src})`}} noPadding className='flex flex-col items-center text-center gap-6 justify-center py-32 mt-20 text-white'>
+        <SectionLayout style={{backgroundImage: `url(${heroBg.src})`}} noPadding className='flex flex-col items-center text-center gap-6 justify-center py-32 mt-16 md:mt-20 text-white'>
             <h1 className="font-bold text-3xl md:text-6xl">Craft Your Inspiration</h1>
             <p className="font-semibold text-xl md:text-2xl">Where Words Meet Timeless Imagery</p>
             <Link href="/create-your-inspiration" className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 w-full max-w-[350px] py-2 bg-gradient-to-r from-oOrange-100 to-oOrange-200 group flex items-center justify-center gap-4">

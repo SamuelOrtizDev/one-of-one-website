@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-balance text-[#072E3F]`}
       >
-        <PopUp/>
+        {/* <PopUp/> */}
         <Navbar />
         <main>
           {children}
