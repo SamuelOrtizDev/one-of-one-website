@@ -4,14 +4,16 @@ import logo from "./assets/logo.svg"
 import Image from "next/image"
 import { useState } from "react"
 import { MenuIcon, X } from "../Icons"
+import { usePathname } from "next/navigation"
 
 export default function Navbar() {
 
     const linkStates = 'transition-colors hover:text-blue-200 hover:font-medium cursor-pointer'
 
     const [isOpen, setIsOpen] = useState(false)
+    const path = usePathname()
 
-    return (
+    if (path != "/create-your-inspiration") return (
         <header className="w-full fixed top-0 px-7 md:px-[72px] py-4 md:py-6 bg-white shadow-sm z-40">
             <div className="mx-auto max-w-[1800px] flex items-center justify-between flex-wrap gap-8">
                 <Link href="/">
