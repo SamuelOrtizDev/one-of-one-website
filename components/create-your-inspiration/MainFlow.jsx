@@ -49,10 +49,6 @@ export function MainFlow() {
         setStep(step - 1)
     }
 
-    // useEffect(() => {
-    //     console.log(userChoice);
-    // }, [userChoice])
-
     return (
         <div className={`transition-all md:bg-gradient-to-b ${isFinalStep ? "from-[#FFE9CA] to-[#FFA943]" : "from-white to-[#76B8D6]"} bg-cover bg-center`}>
             <section className='min-h-screen text-blue-200 mx-auto max-w-[1600px] px-7 md:px-[72px] py-12 md:py-20'>

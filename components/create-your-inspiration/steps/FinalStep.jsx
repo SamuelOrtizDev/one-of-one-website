@@ -83,12 +83,22 @@ export function FinalStep({ userChoice }) {
         const fetchAndMatch = async () => {
             try {
                 const products = await getProducts();
-                const chosenVariant = findProductVariant(products, {
+                const chosenVariant1 = findProductVariant(products.group1, {
                     size: userChoice.size,
                     frame: userChoice.frame,
                     material: userChoice.material
                 });
-                setVariant(chosenVariant)
+
+                const chosenVariant2 = findProductVariant(products.group2, {
+                    size: userChoice.size,
+                    frame: userChoice.frame,
+                    material: userChoice.material
+                });
+
+                const variantsToRandomize = [chosenVariant1, chosenVariant2]
+                const randomVariant = variantsToRandomize[Math.floor(Math.random() * variantsToRandomize.length)];
+
+                setVariant(randomVariant)
 
             } catch (error) {
                 console.error('❌ Error:', error);
@@ -127,8 +137,6 @@ export function FinalStep({ userChoice }) {
             setIsLoading(false)
         }
     }
-
-    useEffect(() => {console.log(selectedFrameColor)}, [])
 
     return (
         <div className="flex flex-col justify-center lg:flex-row gap-8 md:gap-12 text-[#072E3F] mx-auto max-w-6xl">

@@ -1,6 +1,6 @@
 export const productQuery = `
 query Product {
-  products(first:1) {
+  products(first:2) {
     edges {
       node {
         variants(first:16) {
