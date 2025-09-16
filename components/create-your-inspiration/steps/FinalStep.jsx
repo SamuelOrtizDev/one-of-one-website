@@ -79,10 +79,29 @@ export function FinalStep({ userChoice }) {
         }
     }, [userChoice.imageUrl]);
 
+    function getUserGroup() {
+        const GROUP_KEY = 'userProductGroup';
+
+        let userGroup = localStorage.getItem(GROUP_KEY);
+
+        if (!userGroup) {
+            userGroup = Math.random() < 0.5 ? 'group1' : 'group2';
+            localStorage.setItem(GROUP_KEY, userGroup);
+            console.log(`🎲 Primer uso - Grupo asignado: ${userGroup}`);
+        } else {
+            console.log(`✅ Grupo existente: ${userGroup}`);
+        }
+
+        return userGroup;
+    }
+
     useEffect(() => {
         const fetchAndMatch = async () => {
             try {
                 const products = await getProducts();
+
+                const userGroup = getUserGroup();
+
                 const chosenVariant1 = findProductVariant(products.group1, {
                     size: userChoice.size,
                     frame: userChoice.frame,
@@ -95,10 +114,9 @@ export function FinalStep({ userChoice }) {
                     material: userChoice.material
                 });
 
-                const variantsToRandomize = [chosenVariant1, chosenVariant2]
-                const randomVariant = variantsToRandomize[Math.floor(Math.random() * variantsToRandomize.length)];
+                const selectedVariant = userGroup === 'group1' ? chosenVariant1 : chosenVariant2;
 
-                setVariant(randomVariant)
+                setVariant(selectedVariant);
 
             } catch (error) {
                 console.error('❌ Error:', error);
