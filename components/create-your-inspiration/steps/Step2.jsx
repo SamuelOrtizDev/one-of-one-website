@@ -73,6 +73,13 @@ export function Step2({ setUserChoice, userChoice }) {
         }
     }, [isNotImage])
 
+    const handleQuoteChange = (e) => {
+        setUserChoice(prev => ({
+            ...prev,
+            imageDescription: e.target.value
+        }));
+    };
+
     return (
         <div className="flex flex-col gap-4 text-[#072E3F] py-8">
             <h3 className="font-bold text-2xl md:text-4xl">Make It Even More <span className="text-blue-200">Yours</span></h3>
@@ -124,6 +131,11 @@ export function Step2({ setUserChoice, userChoice }) {
                     </>
                 }
             </div>
+
+            <strong className="mt-4">What if I can't find the image I have in mind?</strong>
+            <p>Please describe your perfect background illustration below, and we will generate it for you! You can choose your favorite option through your confirmation email.</p>
+
+            <textarea value={userChoice.imageDescription} onChange={handleQuoteChange} name="image Description" id="imageDesc" placeholder="Type" className="resize-none bg-[#F8F8F8] rounded-lg p-4 outline-none border border-[#F8F8F8] focus:border-[#C9C9C9] w-full max-w-xl min-h-[100px]" />
         </div>
     );
 }

@@ -24,18 +24,20 @@ export function MainFlow() {
         orientation: "",
         quotePosition: "",
         font: "",
+        fontColor: "",
         material: "",
         size: '12" × 16"',
         frame: false,
-        frameColor: ""
+        frameColor: "",
+        imageDescription: ""
     })
 
     const isStepValid = useMemo(() => {
         switch (step) {
             case 1: return userChoice.quote.trim() !== "";
-            case 2: return userChoice.imageUrl !== null;
+            case 2: return userChoice.imageUrl !== null || userChoice.imageDescription.trim() !== "";
             case 3: return userChoice.orientation.trim() !== "" && userChoice.quotePosition.trim() !== "";
-            case 4: return userChoice.font.trim() !== "";
+            case 4: return userChoice.font.trim() !== "" && userChoice.fontColor.trim() !== "";
             case 5: return userChoice.material.trim() !== "" && userChoice.size.trim() !== "" && (!userChoice.frame || userChoice.frameColor.trim() !== "");
             default: return false;
         }
@@ -99,7 +101,7 @@ export function MainFlow() {
                             {(step === 3 && !isFinalStep) && <Step3 userChoice={userChoice} setUserChoice={setUserChoice} />}
                             {(step === 4 && !isFinalStep) && <Step4 userChoice={userChoice} setUserChoice={setUserChoice} />}
                             {(step === 5 && !isFinalStep) && <Step5 userChoice={userChoice} setUserChoice={setUserChoice} />}
-                            {isFinalStep && <FinalStep userChoice={userChoice} />}
+                            {isFinalStep && <FinalStep setStep={setStep} userChoice={userChoice} />}
 
                         </motion.div>
                     </AnimatePresence>
