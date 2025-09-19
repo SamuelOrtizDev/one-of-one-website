@@ -5,37 +5,49 @@ import { Autoplay } from 'swiper/modules'
 import 'swiper/css';
 import posterPlaceholder from "./assets/placeholder.webp"
 import Image from 'next/image';
+import image1 from "./assets/1.png"
+import image2 from "./assets/2.png"
+import image3 from "./assets/3.png"
+import image4 from "./assets/4.png"
+import image5 from "./assets/5.png"
+import image6 from "./assets/6.png"
 
 const quotes = [
     {
         quote: "Every morning I see my custom quote and it sets the perfect tone for my day. Worth every penny.",
         name: "Alex Park",
-        label: "Worth every penny"
+        label: "Worth every penny",
+        image: image1
     },
     {
         quote: "It's not just a poster, it's a daily reminder of my goals.",
         name: "Marcus Rodriguezz",
-        label: "Unmatched details"
+        label: "Unmatched details",
+        image: image2
     },
     {
         quote: "Every morning I see my custom quote and it sets the perfect tone for my day. Worth every penny.",
         name: "Alex Parkk",
-        label: "label here"
+        label: "label here",
+        image: image3
     },
     {
         quote: "The attention to detail is unmatched. It's not just a poster, it's a daily reminder of my goals.",
         name: "Marcus Rodriguezzz",
-        label: "label here"
+        label: "label here",
+        image: image4
     },
     {
         quote: "Every morning I see my custom quote and it sets the perfect tone for my day. Worth every penny.",
         name: "Alex Parkkk",
-        label: "label here"
+        label: "label here",
+        image: image5
     },
     {
         quote: "The attention to detail is unmatched. It's not just a poster, it's a daily reminder of my goals.",
         name: "Marcus Rodriguezzzz",
-        label: "label here"
+        label: "label here",
+        image: image6
     },
 ]
 
@@ -67,9 +79,9 @@ export function Carousel() {
                     }}
                 >
                     {
-                        quotes.map(({ name, quote, label }) => (
+                        quotes.map(({ name, quote, label, image }) => (
                             <SwiperSlide key={name}>
-                                <Testimonial name={name} label={label} quote={quote} />
+                                <Testimonial name={name} label={label} quote={quote} image={image} />
                             </SwiperSlide>
                         ))
                     }
@@ -79,10 +91,10 @@ export function Carousel() {
     )
 }
 
-const Testimonial = ({ quote, name, label }) => (
+const Testimonial = ({ quote, name, label, image }) => (
     <article className='grid grid-cols-2 gap-4 md:gap-0 px-8 py-6 rounded-md bg-gradient-to-b from-white to-[#EDEDED] min-h-[300px] md:min-h-[200px] relative'>
         <picture>
-            <Image src={posterPlaceholder} alt={`${name}'s customized poster`} className='w-full md:max-w-[150px]'/>
+            <Image src={image} alt={`${name}'s customized poster`} className='w-full md:max-w-[150px] rounded-md'/>
         </picture>
 
         <div className='flex flex-col gap-2'>
