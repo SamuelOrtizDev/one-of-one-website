@@ -1,5 +1,12 @@
 import SectionLayout from "@/components/common/SectionLayout";
 import { Carousel } from "./Carousel";
+import Image from 'next/image';
+import image1 from "./assets/1.png"
+import image2 from "./assets/2.png"
+import image3 from "./assets/3.png"
+import image4 from "./assets/4.png"
+import image5 from "./assets/5.png"
+import image6 from "./assets/6.png"
 
 export function Testimonials() {
     return (
@@ -10,7 +17,15 @@ export function Testimonials() {
                     <StarIcon key={index} />
                 ))}
             </div>
-            <Carousel />
+            {/* <Carousel /> */}
+            <picture className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-8 mx-auto max-w-4xl gap-2">
+                <Image alt="poster example" src={image1} className="w-full"/>
+                <Image alt="poster example" src={image2} className="w-full"/>
+                <Image alt="poster example" src={image3} className="w-full"/>
+                <Image alt="poster example" src={image4} className="w-full"/>
+                <Image alt="poster example" src={image5} className="w-full"/>
+                <Image alt="poster example" src={image6} className="w-full"/>
+            </picture>
         </SectionLayout>
     )
 }
