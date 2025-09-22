@@ -18,7 +18,7 @@ export function Testimonials() {
                 ))}
             </div>
             {/* <Carousel /> */}
-            <picture className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-8 mx-auto max-w-4xl gap-2">
+            <picture className="grid grid-cols-2 md:grid-cols-3 mt-8 mx-auto max-w-4xl gap-2">
                 <Image alt="poster example" src={image1} className="w-full"/>
                 <Image alt="poster example" src={image2} className="w-full"/>
                 <Image alt="poster example" src={image3} className="w-full"/>
