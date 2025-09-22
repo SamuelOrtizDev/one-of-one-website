@@ -173,7 +173,8 @@ export function FinalStep({ userChoice, setStep }) {
                 <div
                     style={{
                         backgroundImage: `url(${imageUrl})`,
-                        border: `8px solid ${selectedFrameColor.value || 'transparent'}`
+                        backgroundSize: 'cover',
+                        border: `8px solid ${userChoice.frame ? selectedFrameColor.value : 'transparent'}`
                     }}
                     className={`${userChoice.orientation === "landscape"
                         ? "aspect-[4/3] w-full lg:h-[380px] lg:w-auto"
