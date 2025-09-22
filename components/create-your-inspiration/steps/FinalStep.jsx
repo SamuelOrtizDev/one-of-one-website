@@ -210,7 +210,7 @@ export function FinalStep({ userChoice, setStep }) {
                     {userChoice.frame && <li><strong className="font-bold text-blue-200">Frame Color:</strong> {userChoice.frameColor}</li>}
                 </ul>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 mt-auto">
                     {/* <button onClick={previousStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-blue-200 to-blue-100 group flex flex-row-reverse items-center gap-4 text-white h-fit">
                         Back
                         <span className="group-hover:-translate-x-1 transition-transform rotate-180">
