@@ -9,10 +9,12 @@ import { quotePositions } from "@/const/quotePositions";
 import { fontOptions } from "@/const/fonts";
 import { frameColors } from "@/const/frameColor";
 import { ArrowRight } from "@/components/common/Icons";
+import { Input } from "@/components/common/Inputs";
+import { SubmissionForm } from "../SubmisionForm";
 
 export function FinalStep({ userChoice, setStep }) {
 
-    const selectedQuotePosition = quotePositions.find(quote => quote.value === userChoice.quotePosition)
+    const selectedQuotePosition = userChoice.bestFit ? null : quotePositions.find(quote => quote.value === userChoice.quotePosition)
     const selectedFont = fontOptions.find(font => font.name === userChoice.font)
     const selectedFrameColor = frameColors.find(color => color.color === userChoice.frameColor)
 
@@ -161,6 +163,8 @@ export function FinalStep({ userChoice, setStep }) {
         setStep(1)
     }
 
+    if (userChoice.imageDescription.trim() !== "" || userChoice.bestFit) return <SubmissionForm/>
+
     return (
         <div className="flex flex-col justify-center lg:flex-row gap-8 md:gap-12 text-[#072E3F] mx-auto max-w-6xl">
 
@@ -176,7 +180,7 @@ export function FinalStep({ userChoice, setStep }) {
                         : userChoice.orientation === "portrait"
                             ? "aspect-[3/4] w-full lg:w-[380px] h-auto"
                             : "aspect-square w-full lg:w-[380px] h-auto"
-                        } bg-cover bg-center rounded-xl p-6 flex ${selectedFont.className} ${selectedQuotePosition.position}`}
+                        } bg-cover bg-center rounded-xl p-6 flex ${selectedFont.className} ${selectedQuotePosition ? selectedQuotePosition.position : "justify-center items-center"}`}
                 >
                     <p className={`font-bold text-3xl ${textColor}`}>{userChoice.quote}</p>
                 </div>

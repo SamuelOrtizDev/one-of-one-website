@@ -27,8 +27,17 @@ export function Step3({ setUserChoice, userChoice }) {
         }))
     }
 
-    const handleBestFit = () => {
-        selectOrientation('best-fit')
+    const handleBestFit = (e) => {
+        setUserChoice({
+            ...userChoice,
+            bestFit: e.target.checked
+        });
+
+        if (e.target.checked) {
+            selectQuotePosition('best-fit');
+        } else {
+            selectQuotePosition("");
+        }
     }
 
     return (
@@ -53,25 +62,30 @@ export function Step3({ setUserChoice, userChoice }) {
             </ul>
 
             <label className="flex items-center gap-2 w-fit">
-                <input checked={userChoice.orientation === 'best-fit'} onChange={handleBestFit} type="checkbox" className="size-6 border-2 border-blue-200 rounded-xs focus:ring-blue-200 focus:ring-2 accent-blue-200" />
+                <input checked={userChoice.bestFit} onChange={handleBestFit} type="checkbox" className="size-6 border-2 border-blue-200 rounded-xs focus:ring-blue-200 focus:ring-2 accent-blue-200" />
                 <p>Best Fit</p>
             </label>
 
             <small><strong>Note:</strong> for the "Best Fit" option, we will choose the optimal way to position your quote so that it aesthetically fits with your image. Don't worry, you will receive an image confirmation email before we print!</small>
 
-            <p className="mt-4">Place your <strong>quote.</strong></p>
 
-            <ul className="flex items-end gap-3 md:gap-6 overflow-scroll pb-4">
-                {
-                    quotePositions.map(({ value, position }) => (
-                        <li key={value}>
-                            <button onClick={() => selectQuotePosition(value)} className={`${userChoice.quotePosition === value ? "border-blue-200" : "border-[#F6F6F6] cursor-pointer hover:border-blue-200/10"} border-2 p-3 ${userChoice.orientation === "portrait" ? "aspect-[3/4] w-[120px] md:w-[130px]" : "aspect-[4/3] h-[120px] md:h-[130px]"} bg-[#F6F6F6] rounded-md flex ${position}`}>
-                                <small>Quote here</small>
-                            </button>
-                        </li>
-                    ))
-                }
-            </ul>
+            {
+                !userChoice.bestFit &&
+                <>
+                    <p className="mt-4">Place your <strong>quote.</strong></p>
+                    <ul className="flex items-end gap-3 md:gap-6 overflow-scroll pb-4">
+                        {
+                            quotePositions.map(({ value, position }) => (
+                                <li key={value}>
+                                    <button onClick={() => selectQuotePosition(value)} className={`${userChoice.quotePosition === value ? "border-blue-200" : "border-[#F6F6F6] cursor-pointer hover:border-blue-200/10"} border-2 p-3 ${userChoice.orientation === "portrait" ? "aspect-[3/4] w-[120px] md:w-[130px]" : "aspect-[4/3] h-[120px] md:h-[130px]"} bg-[#F6F6F6] rounded-md flex ${position}`}>
+                                        <small>Quote here</small>
+                                    </button>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </>
+            }
         </div>
     )
 }

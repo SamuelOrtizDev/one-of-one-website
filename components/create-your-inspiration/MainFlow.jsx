@@ -29,7 +29,8 @@ export function MainFlow() {
         size: '12" × 16"',
         frame: false,
         frameColor: "",
-        imageDescription: ""
+        imageDescription: "",
+        bestFit: false
     })
 
     const isStepValid = useMemo(() => {
@@ -55,10 +56,13 @@ export function MainFlow() {
         <div className={`transition-all md:bg-gradient-to-b ${isFinalStep ? "from-[#FFE9CA] to-[#FFA943]" : "from-white to-[#76B8D6]"} bg-cover bg-center`}>
             <section className='min-h-screen text-blue-200 mx-auto max-w-[1600px] px-7 md:px-[72px] py-12 md:py-20'>
                 <div className={`rounded-2xl bg-white relative mt-12 ${isFinalStep ? "w-fit mx-auto md:px-12 py-2 md:py-8" : "w-full md:p-8"}`}>
-                    <Link href="/" className="absolute left-0 md:left-4 -top-16 md:-top-10 flex items-center gap-1 transition-all hover:underline hover:text-red-500">
-                        <X/>
-                        Cancel Creation
-                    </Link>
+                    {
+                        !(isFinalStep && (userChoice.bestFit || userChoice.imageDescription.trim() !== "")) &&
+                        <Link href="/" className="absolute left-0 md:left-4 -top-16 md:-top-10 flex items-center gap-1 transition-all hover:underline hover:text-red-500">
+                            <X />
+                            Cancel Creation
+                        </Link>
+                    }
                     {/* Simple Steps Slider */}
                     {
                         !isFinalStep &&
