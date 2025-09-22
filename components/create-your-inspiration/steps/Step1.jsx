@@ -12,7 +12,10 @@ export function Step1({ setUserChoice, userChoice }) {
     };
 
     return (
-        <div className="flex flex-col gap-4 text-[#072E3F] py-8">
+        <motion.div initial={{ top: 100, opacity: 0 }}
+            animate={{ top: 0, opacity: 1 }}
+            exit={{ top: 100, opacity: 0 }}
+            transition={{ duration: 0.4 }} className="flex flex-col gap-4 text-[#072E3F] py-8">
             <h3 className="font-bold text-2xl md:text-4xl">Let's Create Something <span className="text-blue-200">Unique</span></h3>
             <p><strong>Step 1.</strong> Choose your quote</p>
 
@@ -25,7 +28,7 @@ export function Step1({ setUserChoice, userChoice }) {
                     <AnimatedQuotes />
                 </span>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

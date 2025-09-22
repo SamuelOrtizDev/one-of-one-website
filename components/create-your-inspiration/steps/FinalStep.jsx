@@ -12,7 +12,7 @@ import { ArrowRight } from "@/components/common/Icons";
 import { Input } from "@/components/common/Inputs";
 import { SubmissionForm } from "../SubmisionForm";
 
-export function FinalStep({ userChoice, setStep }) {
+export function FinalStep({ userChoice, setStep, setIsFinalStep }) {
 
     const selectedQuotePosition = userChoice.bestFit ? null : quotePositions.find(quote => quote.value === userChoice.quotePosition)
     const selectedFont = fontOptions.find(font => font.name === userChoice.font)
@@ -160,7 +160,8 @@ export function FinalStep({ userChoice, setStep }) {
 
     const previousStep = () => {
         console.log('egh');
-        setStep(1)
+        setStep(5)
+        setIsFinalStep(false)
     }
 
     if (userChoice.imageDescription.trim() !== "" || userChoice.bestFit) return <SubmissionForm userChoice={userChoice} />
@@ -212,12 +213,12 @@ export function FinalStep({ userChoice, setStep }) {
                 </ul>
 
                 <div className="flex items-center gap-3 mt-auto">
-                    {/* <button onClick={previousStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-blue-200 to-blue-100 group flex flex-row-reverse items-center gap-4 text-white h-fit">
+                    <button onClick={previousStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-blue-200 to-blue-100 group flex flex-row-reverse items-center gap-4 text-white h-fit">
                         Back
                         <span className="group-hover:-translate-x-1 transition-transform rotate-180">
                             <ArrowRight />
                         </span>
-                    </button> */}
+                    </button>
 
                     <button disabled={isLoading} onClick={handleBuy} className="rounded-full font-bold transition-color ease-in-out duration-300 cursor-pointer hover:brightness-125 md:px-8 px-4 py-2 bg-gradient-to-r from-oOrange-100 to-oOrange-200 flex items-center justify-between gap-4 text-white h-fit mt-auto disabled:saturate-0 disabled:cursor-not-allowed w-full">
                         Buy Now

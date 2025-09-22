@@ -7,8 +7,7 @@ import { ChevronLeft, ChevronRight } from "@/components/common/Icons"
 import 'swiper/css';
 import { CheckIcon } from "@/components/common/Icons"
 import { fontColors } from "@/const/fontColors"
-
-
+import { motion } from "framer-motion"
 
 export function Step4({ setUserChoice, userChoice }) {
 
@@ -31,7 +30,10 @@ export function Step4({ setUserChoice, userChoice }) {
 
 
     return (
-        <div className="flex flex-col lg:grid grid-cols-2 md:gap-6">
+        <motion.div initial={{ top: 100, opacity: 0 }}
+            animate={{ top: 0, opacity: 1 }}
+            exit={{ top: 100, opacity: 0 }}
+            transition={{ duration: 0.4 }} className="flex flex-col lg:grid grid-cols-2 md:gap-6">
             <div className="flex flex-col gap-4 text-[#072E3F] py-8">
                 <h3 className="font-bold text-2xl md:text-4xl">Make It <span className="text-blue-200">Feel Real</span></h3>
                 <p><strong>Step 4.</strong> Choose a font</p>
@@ -116,6 +118,6 @@ export function Step4({ setUserChoice, userChoice }) {
                 </div>
                 <p>Font Preview</p>
             </article>
-        </div>
+        </motion.div>
     )
 }

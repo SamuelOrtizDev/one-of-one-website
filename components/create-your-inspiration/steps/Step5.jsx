@@ -39,7 +39,10 @@ export function Step5({ setUserChoice, userChoice }) {
     }
 
     return (
-        <div className="flex flex-col gap-4 text-[#072E3F] py-8">
+        <motion.div initial={{ top: 100, opacity: 0 }}
+            animate={{ top: 0, opacity: 1 }}
+            exit={{ top: 100, opacity: 0 }}
+            transition={{ duration: 0.4 }} className="flex flex-col gap-4 text-[#072E3F] py-8">
             <h3 className="font-bold text-2xl md:text-4xl">From The Screen <span className="text-blue-200">To Your Hands</span></h3>
             <p><strong>Step 5.</strong> Materialize your inspiration</p>
 
@@ -78,11 +81,11 @@ export function Step5({ setUserChoice, userChoice }) {
                         Choose your frame color:
                         <ul className="flex items-end gap-3 md:gap-6">
                             {
-                                frameColors.map(({color, value}) => (
+                                frameColors.map(({ color, value }) => (
                                     <li key={color}>
-                                        <button onClick={() => selectFrameColor(color)} style={{backgroundColor: value}} className={`aspect-square grid place-items-center size-8 rounded-lg ${userChoice.frameColor === color ? "ring-2 ring-blue-200 ring-offset-2 " : "hover:shadow-md transition-all cursor-pointer"} ${color === "White" ? "border border-blue-200" : ""}`}>
+                                        <button onClick={() => selectFrameColor(color)} style={{ backgroundColor: value }} className={`aspect-square grid place-items-center size-8 rounded-lg ${userChoice.frameColor === color ? "ring-2 ring-blue-200 ring-offset-2 " : "hover:shadow-md transition-all cursor-pointer"} ${color === "White" ? "border border-blue-200" : ""}`}>
                                             {
-                                                userChoice.frameColor === color && <span className={color === "White" ? "text-blue-200" : "text-white"}><CheckIcon/></span>
+                                                userChoice.frameColor === color && <span className={color === "White" ? "text-blue-200" : "text-white"}><CheckIcon /></span>
                                             }
                                         </button>
                                     </li>
@@ -92,7 +95,7 @@ export function Step5({ setUserChoice, userChoice }) {
                     </motion.span>
                 }
             </AnimatePresence>
-        </div>
+        </motion.div>
     )
 }
 

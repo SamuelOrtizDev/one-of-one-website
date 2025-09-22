@@ -17,7 +17,7 @@ export function MainFlow() {
     const totalSteps = 5
     const initialStep = 1
     const [step, setStep] = useState(initialStep)
-    const [isFinalStep, setisFinalStep] = useState(false)
+    const [isFinalStep, setIsFinalStep] = useState(false)
     const [userChoice, setUserChoice] = useState({
         quote: "",
         imageUrl: null,
@@ -94,20 +94,14 @@ export function MainFlow() {
                     }
 
                     <AnimatePresence>
-                        <motion.div
-                            initial={{ top: 100, opacity: 0 }}
-                            animate={{ top: 0, opacity: 1 }}
-                            exit={{ top: 100, opacity: 0 }}
-                            transition={{ duration: 0.4 }}>
-
+                        <div>
                             {(step === 1 && !isFinalStep) && <Step1 userChoice={userChoice} setUserChoice={setUserChoice} />}
                             {(step === 2 && !isFinalStep) && <Step2 userChoice={userChoice} setUserChoice={setUserChoice} />}
                             {(step === 3 && !isFinalStep) && <Step3 userChoice={userChoice} setUserChoice={setUserChoice} />}
                             {(step === 4 && !isFinalStep) && <Step4 userChoice={userChoice} setUserChoice={setUserChoice} />}
                             {(step === 5 && !isFinalStep) && <Step5 userChoice={userChoice} setUserChoice={setUserChoice} />}
-                            {isFinalStep && <FinalStep setStep={setStep} userChoice={userChoice} />}
-
-                        </motion.div>
+                            {isFinalStep && <FinalStep setStep={setStep} setIsFinalStep={setIsFinalStep} userChoice={userChoice} />}
+                        </div>
                     </AnimatePresence>
 
                     {/* Control Buttons */}
@@ -136,7 +130,7 @@ export function MainFlow() {
 
                             {
                                 (step === totalSteps) &&
-                                <button disabled={!isStepValid} onClick={() => setisFinalStep(true)} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-oOrange-100 to-oOrange-200 group flex items-center gap-4 text-white h-fit disabled:saturate-0 disabled:cursor-not-allowed">
+                                <button disabled={!isStepValid} onClick={() => setIsFinalStep(true)} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-oOrange-100 to-oOrange-200 group flex items-center gap-4 text-white h-fit disabled:saturate-0 disabled:cursor-not-allowed">
                                     Continue to final
                                     <span className="group-hover:translate-x-1 transition-transform">
                                         <ArrowRight />

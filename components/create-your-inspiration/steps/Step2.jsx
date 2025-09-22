@@ -1,6 +1,7 @@
 'use client'
 import { SadFileIcon, UploadIcon, X } from "@/components/common/Icons";
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export function Step2({ setUserChoice, userChoice }) {
 
@@ -81,7 +82,10 @@ export function Step2({ setUserChoice, userChoice }) {
     };
 
     return (
-        <div className="flex flex-col gap-4 text-[#072E3F] py-8">
+        <motion.div initial={{ top: 100, opacity: 0 }}
+            animate={{ top: 0, opacity: 1 }}
+            exit={{ top: 100, opacity: 0 }}
+            transition={{ duration: 0.4 }} className="flex flex-col gap-4 text-[#072E3F] py-8">
             <h3 className="font-bold text-2xl md:text-4xl">Make It Even More <span className="text-blue-200">Yours</span></h3>
             <p><strong>Step 2.</strong> Upload your image</p>
 
@@ -136,6 +140,6 @@ export function Step2({ setUserChoice, userChoice }) {
             <p>Please describe your perfect background illustration below, and we will generate it for you! You can choose your favorite option through your confirmation email.</p>
 
             <textarea value={userChoice.imageDescription} onChange={handleQuoteChange} name="image Description" id="imageDesc" placeholder="Type" className="resize-none bg-[#F8F8F8] rounded-lg p-4 outline-none border border-[#F8F8F8] focus:border-[#C9C9C9] w-full max-w-xl min-h-[100px]" />
-        </div>
+        </motion.div>
     );
 }

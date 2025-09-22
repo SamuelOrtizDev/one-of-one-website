@@ -1,4 +1,6 @@
+'use client'
 import { quotePositions } from "@/const/quotePositions"
+import { motion } from "framer-motion"
 
 export function Step3({ setUserChoice, userChoice }) {
 
@@ -41,7 +43,10 @@ export function Step3({ setUserChoice, userChoice }) {
     }
 
     return (
-        <div className="flex flex-col gap-4 text-[#072E3F] py-8">
+        <motion.div initial={{ top: 100, opacity: 0 }}
+            animate={{ top: 0, opacity: 1 }}
+            exit={{ top: 100, opacity: 0 }}
+            transition={{ duration: 0.4 }} className="flex flex-col gap-4 text-[#072E3F] py-8">
             <h3 className="font-bold text-2xl md:text-4xl">Give It A <span className="text-blue-200">Twist</span></h3>
             <p><strong>Step 3.</strong> Choose your orientation</p>
 
@@ -86,6 +91,6 @@ export function Step3({ setUserChoice, userChoice }) {
                     </ul>
                 </>
             }
-        </div>
+        </motion.div>
     )
 }
