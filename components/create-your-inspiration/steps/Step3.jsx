@@ -11,10 +11,6 @@ export function Step3({ setUserChoice, userChoice }) {
             label: "Landscape",
             value: "landscape",
         },
-        {
-            label: "Best Fit",
-            value: "best-fit",
-        },
     ]
 
     const selectOrientation = (value) => {
@@ -31,12 +27,16 @@ export function Step3({ setUserChoice, userChoice }) {
         }))
     }
 
+    const handleBestFit = () => {
+        selectOrientation('best-fit')
+    }
+
     return (
         <div className="flex flex-col gap-4 text-[#072E3F] py-8">
             <h3 className="font-bold text-2xl md:text-4xl">Give It A <span className="text-blue-200">Twist</span></h3>
             <p><strong>Step 3.</strong> Choose your orientation</p>
 
-            <ul className="flex items-end gap-3 md:gap-6 md:mb-4 overflow-x-scroll md:overflow-visible">
+            <ul className="flex items-end gap-3 md:gap-6 md:mb-4">
                 {
                     orientationOptions.map(({ label, value }) => (
                         <li className="relative group" key={value}>
@@ -52,9 +52,14 @@ export function Step3({ setUserChoice, userChoice }) {
                 }
             </ul>
 
-            <small className="md:hidden"><strong>Note:</strong> for the "Best Fit" option, we will choose the optimal way to position your quote so that it aesthetically fits with your image. Don't worry, you will receive an image confirmation email before we print!</small>
+            <label className="flex items-center gap-2 w-fit">
+                <input checked={userChoice.orientation === 'best-fit'} onChange={handleBestFit} type="checkbox" className="size-6 border-2 border-blue-200 rounded-xs focus:ring-blue-200 focus:ring-2 accent-blue-200" />
+                <p>Best Fit</p>
+            </label>
 
-            <p>Place your <strong>quote.</strong></p>
+            <small><strong>Note:</strong> for the "Best Fit" option, we will choose the optimal way to position your quote so that it aesthetically fits with your image. Don't worry, you will receive an image confirmation email before we print!</small>
+
+            <p className="mt-4">Place your <strong>quote.</strong></p>
 
             <ul className="flex items-end gap-3 md:gap-6 overflow-scroll pb-4">
                 {
