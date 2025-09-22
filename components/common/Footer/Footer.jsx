@@ -26,7 +26,7 @@ export default function Footer() {
                 <div className="flex flex-col items-center gap-3">
                     <span className="flex items-center justify-center gap-6 font-bold">
                         {/* <Link className="hover:underline" href="/">Gift a Memory</Link> */}
-                        <Link className="hover:underline" href="/">About Us</Link>
+                        {/* <Link className="hover:underline" href="/">About Us</Link> */}
                     </span>
                     <p className="text-oOrange-100 text-center font-medium">“Your memories and Inspirations deserve to Shine.”</p>
                 </div>
