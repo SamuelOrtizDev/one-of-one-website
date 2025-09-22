@@ -4,9 +4,21 @@ import { Input } from "../common/Inputs"
 import { useForm } from "@formspree/react"
 import Link from "next/link"
 
-export function SubmissionForm() {
+export function SubmissionForm({ userChoice }) {
 
     const [state, handleSubmit] = useForm("mblzrwgv");
+
+    const handleCustomSubmit = (e) => {
+        if (userChoice) {
+            const userChoiceInput = document.createElement('input');
+            userChoiceInput.type = 'hidden';
+            userChoiceInput.name = 'userChoice';
+            userChoiceInput.value = JSON.stringify(userChoice);
+            e.target.appendChild(userChoiceInput);
+        }
+
+        return handleSubmit(e);
+    };
 
     return (
         <div className="flex flex-col justify-center gap-8 text-[#072E3F] mx-auto max-w-2xl">
@@ -40,7 +52,7 @@ export function SubmissionForm() {
                         <h3 className="font-bold text-2xl md:text-4xl">Your inspiration is <span className="text-blue-200">being crafted!</span></h3>
                         <p className="text-wrap">We will send you an email where you can select your preferred poster design within 24 hours! Please provide your name and email to receive our confirmation and checkout email.</p>
                     </span>
-                    <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <form onSubmit={handleCustomSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                         <Input required label={'Name:'} placeholder={"John"} name={"name"} />
                         <Input required label={'Last:'} placeholder={"Doe"} name={"last"} />
                         <Input required label={'Email:'} type="email" className={'col-span-full'} placeholder={"johndoe@gmail.com"} name={"email"} />

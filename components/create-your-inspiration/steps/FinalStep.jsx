@@ -163,7 +163,7 @@ export function FinalStep({ userChoice, setStep }) {
         setStep(1)
     }
 
-    if (userChoice.imageDescription.trim() !== "" || userChoice.bestFit) return <SubmissionForm/>
+    if (userChoice.imageDescription.trim() !== "" || userChoice.bestFit) return <SubmissionForm userChoice={userChoice} />
 
     return (
         <div className="flex flex-col justify-center lg:flex-row gap-8 md:gap-12 text-[#072E3F] mx-auto max-w-6xl">
@@ -174,6 +174,7 @@ export function FinalStep({ userChoice, setStep }) {
                     style={{
                         backgroundImage: `url(${imageUrl})`,
                         backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
                         border: `8px solid ${userChoice.frame ? selectedFrameColor.value : 'transparent'}`
                     }}
                     className={`${userChoice.orientation === "landscape"
