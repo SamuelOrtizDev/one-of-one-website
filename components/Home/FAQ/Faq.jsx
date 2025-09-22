@@ -6,6 +6,10 @@ import { useState } from "react";
 
 const faqPosters = [
     {
+        title: "What if I don't have my perfect background image or I'm struggling with the aesthetics of quote placement?",
+        desc: "We are committed to working with you to create your ideal design, so we have you covered! On the second step of our customization process, you can opt in to describe your perfect image instead of uploading it; we will then generate it for you. The more detail you provide in that section, the greater the odds of us reading your mind! Moreover, if you are unsure of where your inspirational text will look best, we also have the option of 'best fit' which leaves your quote placement up to our graphic designers. If you select either one of these features, we will send you a few digital versions of your poster design within 24 hours - completely free of charge. You will then choose your favorite version (or ask for another edit) and proceed to the checkout page from that email!"
+    },
+    {
         title: "What is the difference between matte and luster posters?",
         desc: "Matte posters feature our enhanced museum-quality Epson matte paper, delivering a soft, glare-free finish that's perfect for any lighting and resistant to fingerprints—ensuring your artwork looks professional and timeless. Luster posters, on our premium luster photo paper, offer a subtle semi-gloss sheen that brings out vibrant colors, sharp contrasts, and rich details, making them ideal for dynamic designs. Whether you choose matte for elegance or luster for boldness, both options provide amazing quality tailored to your vision."
     },
@@ -32,10 +36,6 @@ const faqPosters = [
     {
         title: "What if my poster arrives damaged or with quality issues?",
         desc: "We're committed to perfection, so if anything isn't quite right upon arrival, simply reach out to oneofoneposters@gmail.com for a hassle-free reprint or refund. Our quality checks and tracked shipping options help prevent issues, making sure you always receive your product in the best state."
-    },
-    {
-        title: "What if I don't have my perfect background image or I'm struggling with the aesthetics of quote placement?",
-        desc: "We are committed to working with you to create your ideal design, so we have you covered! On the second step of our customization process, you can opt in to describe your perfect image instead of uploading it; we will then generate it for you. The more detail you provide in that section, the greater the odds of us reading your mind! Moreover, if you are unsure of where your inspirational text will look best, we also have the option of 'best fit' which leaves your quote placement up to our graphic designers. If you select either one of these features, we will send you a few digital versions of your poster design within 24 hours - completely free of charge. You will then choose your favorite version (or ask for another edit) and proceed to the checkout page from that email!"
     }
 ];
 
