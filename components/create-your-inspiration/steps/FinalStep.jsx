@@ -18,69 +18,8 @@ export function FinalStep({ userChoice, setStep, setIsFinalStep }) {
     const selectedFont = fontOptions.find(font => font.name === userChoice.font)
     const selectedFrameColor = frameColors.find(color => color.color === userChoice.frameColor)
 
-    const [textColor, setTextColor] = useState('text-white');
-    const [imageUrl, setImageUrl] = useState('');
     const [variant, setVariant] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-
-    const analyzeImageBrightness = (imageSrc) => {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            canvas.width = img.width;
-            canvas.height = img.height;
-
-            ctx.drawImage(img, 0, 0);
-
-            try {
-                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                const pixels = imageData.data;
-
-                let totalBrightness = 0;
-                const pixelCount = pixels.length / 4; // 4 values per pixel (RGBA)
-
-                for (let i = 0; i < pixels.length; i += 4) {
-                    const r = pixels[i];
-                    const g = pixels[i + 1];
-                    const b = pixels[i + 2];
-
-                    // Fórmula para calcular brillo percibido
-                    const brightness = (r * 0.299 + g * 0.587 + b * 0.114);
-                    totalBrightness += brightness;
-                }
-
-                const averageBrightness = totalBrightness / pixelCount;
-
-                // Si el brillo promedio es mayor a 128 (escala 0-255), es imagen clara
-                setTextColor(averageBrightness > 128 ? 'text-black' : 'text-white');
-
-            } catch (error) {
-                console.log('No se pudo analizar la imagen, usando texto blanco por defecto');
-                setTextColor('text-white');
-            }
-        };
-
-        img.onerror = () => {
-            setTextColor('text-white'); // Fallback
-        };
-
-        img.src = imageSrc;
-    };
-
-    useEffect(() => {
-        if (userChoice.imageUrl) {
-            const url = URL.createObjectURL(userChoice.imageUrl);
-            setImageUrl(url);
-            analyzeImageBrightness(url);
-
-            // Cleanup
-            return () => URL.revokeObjectURL(url);
-        }
-    }, [userChoice.imageUrl]);
 
     function getUserGroup() {
         const GROUP_KEY = 'userProductGroup';
@@ -159,12 +98,11 @@ export function FinalStep({ userChoice, setStep, setIsFinalStep }) {
     }
 
     const previousStep = () => {
-        console.log('egh');
         setStep(5)
         setIsFinalStep(false)
     }
 
-    if (userChoice.imageDescription.trim() !== "" || userChoice.bestFit) return <SubmissionForm userChoice={userChoice} />
+    if (userChoice.imageDescription.trim() !== "" || userChoice.bestFit) return <SubmissionForm userChoice={userChoice} setIsFinalStep={setIsFinalStep} setStep={setStep} />
 
     return (
         <div className="flex flex-col justify-center lg:flex-row gap-8 md:gap-12 text-[#072E3F] mx-auto max-w-6xl">
@@ -173,9 +111,8 @@ export function FinalStep({ userChoice, setStep, setIsFinalStep }) {
                 userChoice.imageUrl &&
                 <div
                     style={{
-                        backgroundImage: `url(${imageUrl})`,
+                        backgroundImage: `url(${URL.createObjectURL(userChoice.imageUrl)})`,
                         backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
                         border: `8px solid ${userChoice.frame ? selectedFrameColor.value : 'transparent'}`
                     }}
                     className={`${userChoice.orientation === "landscape"
@@ -185,7 +122,7 @@ export function FinalStep({ userChoice, setStep, setIsFinalStep }) {
                             : "aspect-square w-full lg:w-[380px] h-auto"
                         } bg-cover bg-center rounded-xl p-6 flex ${selectedFont.className} ${selectedQuotePosition ? selectedQuotePosition.position : "justify-center items-center"}`}
                 >
-                    <p className={`font-bold text-3xl ${textColor}`}>{userChoice.quote}</p>
+                    <p className={`font-bold text-3xl ${userChoice.fontColor === "Black" ? "text-black" : "text-white"}`}>{userChoice.quote}</p>
                 </div>
             }
 
@@ -193,7 +130,7 @@ export function FinalStep({ userChoice, setStep, setIsFinalStep }) {
             <article className="flex flex-col gap-6 md:gap-8">
                 <span className="flex flex-col gap-2">
                     <h3 className="font-bold text-2xl md:text-4xl">Your Inspiration is <span className="text-blue-200">Created!</span></h3>
-                    <p className="text-wrap">Here's a preview, if it looks amazing to you... go to checkout</p>
+                    <p className="text-wrap max-w-xl">If your quote is poorly visible against your background image, don't worry! Our graphic designer does a quality check on all ordered posters. You will receive the final poster preview within 24 hours</p>
                 </span>
 
                 <ul className="flex flex-col gap-2">
