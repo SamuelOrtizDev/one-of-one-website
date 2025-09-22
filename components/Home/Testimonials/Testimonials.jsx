@@ -1,11 +1,12 @@
+'use client'
 import SectionLayout from "@/components/common/SectionLayout";
-import { Carousel } from "./Carousel";
+import { motion } from "framer-motion";
 import Image from 'next/image';
 import image1 from "./assets/1.png"
 import image2 from "./assets/2.png"
 import image3 from "./assets/3.png"
-import image4 from "./assets/4.png"
-import image5 from "./assets/5.png"
+import image4 from "./assets/h1.png"
+import image5 from "./assets/h2.png"
 import image6 from "./assets/6.png"
 
 export function Testimonials() {
@@ -17,15 +18,18 @@ export function Testimonials() {
                     <StarIcon key={index} />
                 ))}
             </div>
-            {/* <Carousel /> */}
-            <picture className="grid grid-cols-2 md:grid-cols-3 mt-8 mx-auto max-w-4xl gap-2">
-                <Image alt="poster example" src={image1} className="w-full"/>
-                <Image alt="poster example" src={image2} className="w-full"/>
-                <Image alt="poster example" src={image3} className="w-full"/>
-                <Image alt="poster example" src={image4} className="w-full"/>
-                <Image alt="poster example" src={image5} className="w-full"/>
-                <Image alt="poster example" src={image6} className="w-full"/>
-            </picture>
+            <div className="grid grid-cols-2 md:grid-cols-4 mt-8 md:mt-14 mx-auto gap-2 max-w-7xl">
+                <div className="flex items-end md:-translate-y-[3.625rem]">
+                    <Image alt="poster example" src={image1} className="aspect-[3/4] rounded-xl" />
+                </div>
+                <div className="flex items-end md:-translate-y-[3.625rem]">
+                    <Image alt="poster example" src={image2} className="aspect-[3/4] rounded-xl" />
+                </div>
+                <Image alt="poster example" src={image4} className="aspect-[4/3] col-span-2 rounded-xl" />
+                <Image alt="poster example" src={image5} className="aspect-[4/3] col-span-2 md:-translate-y-[3.625rem] rounded-xl" />
+                <Image alt="poster example" src={image3} className="aspect-[3/4] rounded-xl" />
+                <Image alt="poster example" src={image6} className="aspect-[3/4] rounded-xl" />
+            </div>
         </SectionLayout>
     )
 }
