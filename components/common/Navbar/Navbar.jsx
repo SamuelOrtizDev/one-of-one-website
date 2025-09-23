@@ -38,7 +38,7 @@ export default function Navbar() {
                     isOpen &&
                     <div className="flex flex-col items-center gap-4 basis-full mb-8 text-blue-100">
                         {/* <Link className={linkStates} href="/">Gift a Memory</Link> */}
-                        <Link className={linkStates} href="/">About Us</Link>
+                        {/* <Link className={linkStates} href="/">About Us</Link> */}
                         <Link href="/create-your-inspiration" className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 py-2 px-6 bg-gradient-to-r from-oOrange-100 to-oOrange-200 text-white">Create Your inspiration</Link>
                     </div>
                 }
