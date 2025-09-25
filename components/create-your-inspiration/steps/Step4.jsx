@@ -88,31 +88,34 @@ export function Step4({ setUserChoice, userChoice }) {
                     </button>
                 </div>
 
-                <span
-                    className=" flex flex-col gap-3"
-                >
-                    Choose your font color:
-                    <ul className="flex items-end gap-3 md:gap-3">
-                        {
-                            fontColors.map(({ color, value }) => (
-                                <li key={color}>
-                                    <button onClick={() => selectFontColor(color)} style={{ backgroundColor: value }} className={`aspect-square grid place-items-center size-8 rounded-lg ${userChoice.fontColor === color ? "ring-2 ring-blue-200 ring-offset-2 " : "hover:shadow-md transition-all cursor-pointer"} ${color === "White" ? "border border-blue-200" : ""}`}>
-                                        {
-                                            userChoice.fontColor === color && <span className={color === "White" ? "text-blue-200" : "text-white"}><CheckIcon /></span>
-                                        }
-                                    </button>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </span>
+                {
+                    !userChoice.bestFit &&
+                    <span
+                        className=" flex flex-col gap-3"
+                    >
+                        Choose your font color:
+                        <ul className="flex items-end gap-3 md:gap-3">
+                            {
+                                fontColors.map(({ color, value }) => (
+                                    <li key={color}>
+                                        <button onClick={() => selectFontColor(color)} style={{ backgroundColor: value }} className={`aspect-square grid place-items-center size-8 rounded-lg ${userChoice.fontColor === color ? "ring-2 ring-blue-200 ring-offset-2 " : "hover:shadow-md transition-all cursor-pointer"} ${color === "White" ? "border border-blue-200" : ""}`}>
+                                            {
+                                                userChoice.fontColor === color && <span className={color === "White" ? "text-blue-200" : "text-white"}><CheckIcon /></span>
+                                            }
+                                        </button>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </span>
+                }
             </div>
 
             <article className="flex flex-col items-center gap-4 mb-12 md:mb-0 lg:border-l border-blue-200/20 bg-transparent">
                 <div className={`border border-blue-100 m-auto rounded-xl shadow-sm shadow-blue-100/40 p-6 ${userChoice.orientation === "portrait" ? "aspect-[3/4] w-[200px] md:w-[230px]" : userChoice.orientation === "landscape" ? "aspect-[4/3] h-[200px] md:h-[230px]" : "aspect-square h-[230px] md:h-[270px]"} flex ${selectedQuotePosition ? selectedQuotePosition.position : "justify-center items-center"}`}>
                     <strong className={userChoice.font ? selectedFont.className : ''}>
                         {
-                            userChoice.font ? userChoice.font : "Choose Font"
+                            userChoice.quote
                         }
                     </strong>
                 </div>

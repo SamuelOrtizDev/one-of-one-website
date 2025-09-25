@@ -38,7 +38,7 @@ export function MainFlow() {
             case 1: return userChoice.quote.trim() !== "";
             case 2: return userChoice.imageUrl !== null || userChoice.imageDescription.trim() !== "";
             case 3: return userChoice.orientation.trim() !== "" && userChoice.quotePosition.trim() !== "";
-            case 4: return userChoice.font.trim() !== "" && userChoice.fontColor.trim() !== "";
+            case 4: return userChoice.font.trim() !== "" && (userChoice.fontColor.trim() !== "" || userChoice.bestFit);
             case 5: return userChoice.material.trim() !== "" && userChoice.size.trim() !== "" && (!userChoice.frame || userChoice.frameColor.trim() !== "");
             default: return false;
         }
