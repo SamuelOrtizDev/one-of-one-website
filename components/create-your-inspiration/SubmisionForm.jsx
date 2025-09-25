@@ -4,30 +4,55 @@ import { ArrowRight, Loader } from "../common/Icons"
 import { Input } from "../common/Inputs"
 import { useForm } from "@formspree/react"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
 export function SubmissionForm({ userChoice, setIsFinalStep, setStep }) {
 
+    useEffect(() => {
+        console.log(userChoice);
+    }, [])
+
     const [state, handleSubmit] = useForm("xwprpvvo");
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleCustomSubmit = async (e) => {
-        if (userChoice) {
+        e.preventDefault();
+        setIsLoading(true)
+        try {
+            if (userChoice) {
+                const formData = { ...userChoice }
 
-            const formData = {...userChoice}
-            if (userChoice.imageUrl) {
-                const savedImage = await createPermanentImageURL(userChoice.imageUrl)
-                formData.imageUrl = savedImage
-                formData.imageDescription = ""
+                if (userChoice.imageDescription.trim() !== "") {
+                    formData.imageUrl = null;
+                } else {
+                    const savedImage = await createPermanentImageURL(userChoice.imageUrl);
+                    formData.imageUrl = savedImage;
+                    formData.imageDescription = "";
+                }
+                const userChoiceInput = document.createElement('input');
+                userChoiceInput.type = 'hidden';
+                userChoiceInput.name = 'userChoice';
+                userChoiceInput.value = JSON.stringify(formData);
+                e.target.appendChild(userChoiceInput);
             }
-            if (userChoice.imageDescription.trim() !== "") formData.imageUrl = null
 
-            const userChoiceInput = document.createElement('input');
-            userChoiceInput.type = 'hidden';
-            userChoiceInput.name = 'userChoice';
-            userChoiceInput.value = JSON.stringify(formData)
-            e.target.appendChild(userChoiceInput);
+            const form = e.target;
+            const newSubmitEvent = new SubmitEvent('submit', {
+                bubbles: true,
+                cancelable: true,
+                submitter: e.submitter || form.querySelector('[type="submit"]')
+            });
+
+            Object.defineProperty(newSubmitEvent, 'target', { value: form });
+            Object.defineProperty(newSubmitEvent, 'currentTarget', { value: form });
+
+            return await handleSubmit(newSubmitEvent);
         }
-
-        return handleSubmit(e);
+        catch (error) {
+            console.error('Error en el envío:', error)
+        } finally {
+            setIsLoading(false)
+        }
     };
 
     const previousStep = () => {
@@ -39,7 +64,7 @@ export function SubmissionForm({ userChoice, setIsFinalStep, setStep }) {
     return (
         <div className="flex flex-col justify-center gap-8 text-[#072E3F] -mt-12 md:mt-0 mx-auto max-w-2xl">
             {
-                state.submitting &&
+                isLoading &&
                 <div className="grid place-items-center w-full h-full">
                     <span className="scale-200 animate-spin">
                         <Loader />
@@ -62,7 +87,7 @@ export function SubmissionForm({ userChoice, setIsFinalStep, setStep }) {
                 </div>
             }
             {
-                (!state.submitting && !state.succeeded) &&
+                (!state.submitting && !state.succeeded && !isLoading) &&
                 <>
                     <span className="flex flex-col gap-2">
                         <h3 className="font-bold text-2xl md:text-4xl text-wrap">Your inspiration is <span className="text-blue-200">being crafted!</span></h3>
