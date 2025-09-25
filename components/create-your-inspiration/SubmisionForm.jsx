@@ -8,10 +8,6 @@ import { useEffect, useState } from "react"
 
 export function SubmissionForm({ userChoice, setIsFinalStep, setStep }) {
 
-    useEffect(() => {
-        console.log(userChoice);
-    }, [])
-
     const [state, handleSubmit] = useForm("xwprpvvo");
     const [isLoading, setIsLoading] = useState(false)
 
