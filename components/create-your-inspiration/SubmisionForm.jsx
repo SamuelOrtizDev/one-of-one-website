@@ -1,4 +1,5 @@
 'use client'
+import { createPermanentImageURL } from "@/lib/createPermanentImageURL"
 import { ArrowRight, Loader } from "../common/Icons"
 import { Input } from "../common/Inputs"
 import { useForm } from "@formspree/react"
@@ -8,12 +9,21 @@ export function SubmissionForm({ userChoice, setIsFinalStep, setStep }) {
 
     const [state, handleSubmit] = useForm("xwprpvvo");
 
-    const handleCustomSubmit = (e) => {
+    const handleCustomSubmit = async (e) => {
         if (userChoice) {
+
+            const formData = {...userChoice}
+            if (userChoice.imageUrl) {
+                const savedImage = await createPermanentImageURL(userChoice.imageUrl)
+                formData.imageUrl = savedImage
+                formData.imageDescription = ""
+            }
+            if (userChoice.imageDescription.trim() !== "") formData.imageUrl = null
+
             const userChoiceInput = document.createElement('input');
             userChoiceInput.type = 'hidden';
             userChoiceInput.name = 'userChoice';
-            userChoiceInput.value = JSON.stringify(userChoice);
+            userChoiceInput.value = JSON.stringify(formData)
             e.target.appendChild(userChoiceInput);
         }
 

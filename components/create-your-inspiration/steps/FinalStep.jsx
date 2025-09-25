@@ -72,7 +72,6 @@ export function FinalStep({ userChoice, setStep, setIsFinalStep }) {
 
             const checkoutOrder = {
                 imageUrl: PermanentImage,
-                imageDescription: userChoice.imageDescription,
                 quote: userChoice.quote,
                 quotePosition: userChoice.quotePosition,
                 orientation: userChoice.orientation,

@@ -1,7 +1,7 @@
 'use client'
 import { SadFileIcon, UploadIcon, X } from "@/components/common/Icons";
 import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 export function Step2({ setUserChoice, userChoice }) {
 
@@ -89,52 +89,81 @@ export function Step2({ setUserChoice, userChoice }) {
             <h3 className="font-bold text-2xl md:text-4xl">Make It Even More <span className="text-blue-200">Yours</span></h3>
             <p><strong>Step 2.</strong> Upload your image</p>
 
-            <div onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} className={`relative ${isDragging && !image ? "bg-blue-100/50 text-blue-200" : "bg-[#F8F8F8]"} border-2 rounded-xl border-dashed border-blue-100 w-full max-w-xl min-h-[300px] flex flex-col items-center justify-center gap-4 md:mt-4`}>
+            <AnimatePresence>
                 {
-                    (!image && !isDragging && !isNotImage) &&
-                    <>
-                        <span className="text-blue-200 scale-200">
-                            <UploadIcon />
-                        </span>
-                        <h3 className="font-bold text-xl md:text-2xl">Drop your image here</h3>
-                        <p>or</p>
+                    userChoice.imageDescription.trim() === "" &&
+                    <motion.div
+                        initial={{
+                            height: 0,
+                            opacity: 0,
+                            y: -20
+                        }}
+                        animate={{
+                            height: "auto",
+                            opacity: 1,
+                            y: 0
+                        }}
+                        exit={{
+                            height: 0,
+                            opacity: 0,
+                            y: -20
+                        }}
+                        transition={{
+                            duration: 0.4,
+                            ease: [0.25, 0.46, 0.45, 0.94], // Suave curva de animación
+                            height: { duration: 0.4 },
+                            opacity: { duration: 0.3, delay: 0.1 }, // La opacidad entra un poco después
+                            y: { duration: 0.4 }
+                        }}
+                        style={{ overflow: 'hidden' }}
+                        onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} className={`relative ${isDragging && !image ? "bg-blue-100/50 text-blue-200" : "bg-[#F8F8F8]"} border-2 rounded-xl border-dashed border-blue-100 w-full max-w-xl min-h-[300px] flex flex-col items-center justify-center gap-4 md:mt-4`}>
+                        {
+                            (!image && !isDragging && !isNotImage) &&
+                            <>
+                                <span className="text-blue-200 scale-200">
+                                    <UploadIcon />
+                                </span>
+                                <h3 className="font-bold text-xl md:text-2xl">Drop your image here</h3>
+                                <p>or</p>
 
-                        <input type="file" accept="image/*" hidden onChange={(e) => {
-                            upload(e.target.files[0])
-                        }} ref={inputRef} />
+                                <input type="file" accept="image/*" hidden onChange={(e) => {
+                                    upload(e.target.files[0])
+                                }} ref={inputRef} />
 
-                        <button onClick={() => inputRef.current.click()} className="rounded-full bg-blue-100/20 font-bold text-blue-200 px-3 py-1 cursor-pointer transition-colors hover:bg-blue-200 hover:text-white">Choose a file</button>
-                        <small className="text-center">Note: upload images with a minimum of 1920px to ensure high quality</small>
-                    </>
+                                <button onClick={() => inputRef.current.click()} className="rounded-full bg-blue-100/20 font-bold text-blue-200 px-3 py-1 cursor-pointer transition-colors hover:bg-blue-200 hover:text-white">Choose a file</button>
+                                <small className="text-center">Note: upload images with a minimum of 1920px to ensure high quality</small>
+                            </>
+                        }
+
+                        {
+                            (isDragging && !image) &&
+                            <p className="font-bold text-xl">Drop your image here!!</p>
+                        }
+
+                        {
+                            image &&
+                            <span className="flex justify-start items-start w-full h-full p-8">
+                                <div className="relative">
+                                    <img src={URL.createObjectURL(image)} alt="image" className="w-auto max-h-[200px]" />
+
+                                    <button onClick={handleRemove} className="rounded-full grid place-items-center w-8 h-8 bg-red-200 absolute -top-4 -right-4 cursor-pointer"><X /></button>
+                                </div>
+                            </span>
+                        }
+
+                        {
+                            (isNotImage) &&
+                            <>
+                                <span className="text-red-500 scale-200">
+                                    <SadFileIcon />
+                                </span>
+                                <p className="font-bold text-xl">Drop images Only</p>
+                                <small>use files with .jpg, .jpeg or .png extension</small>
+                            </>
+                        }
+                    </motion.div>
                 }
-
-                {
-                    (isDragging && !image) &&
-                    <p className="font-bold text-xl">Drop your image here!!</p>
-                }
-
-                {
-                    image &&
-                    <span className="flex justify-start items-start w-full h-full p-8">
-                        <div className="relative">
-                            <img src={URL.createObjectURL(image)} alt="image" className="w-auto max-h-[200px]" />
-
-                            <button onClick={handleRemove} className="rounded-full grid place-items-center w-8 h-8 bg-red-200 absolute -top-4 -right-4 cursor-pointer"><X /></button>
-                        </div>
-                    </span>
-                }
-
-                {
-                    (isNotImage) &&
-                    <>
-                        <span className="text-red-500 scale-200">
-                            <SadFileIcon />
-                        </span>
-                        <p className="font-bold text-xl">Drop images Only</p>
-                        <small>use files with .jpg, .jpeg or .png extension</small>
-                    </>
-                }
-            </div>
+            </AnimatePresence>
 
             <strong className="mt-4">What if I can't find the image I have in mind?</strong>
             <p>Please describe your perfect background illustration below, and we will generate it for you! You can choose your favorite option through your confirmation email.</p>
