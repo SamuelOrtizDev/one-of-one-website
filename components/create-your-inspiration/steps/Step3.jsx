@@ -71,7 +71,7 @@ export function Step3({ setUserChoice, userChoice }) {
                 <p>Best Fit</p>
             </label>
 
-            <small><strong>Note:</strong> for the "Best Fit" option, we will choose the optimal way to position your quote so that it aesthetically fits with your image. Don't worry, you will receive an image confirmation email before we print!</small>
+            <small><strong>Note:</strong> for the "Best Fit" option, we will choose the optimal way to position your quote and confirm it with you within 24 hours.</small>
 
 
             {
