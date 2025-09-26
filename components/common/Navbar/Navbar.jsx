@@ -14,10 +14,11 @@ export default function Navbar() {
     const path = usePathname()
 
     if (path != "/create-your-inspiration") return (
-        <header className="w-full fixed top-0 px-7 md:px-[72px] py-4 md:py-6 bg-white shadow-sm z-40">
+        <header className="w-full fixed top-0 px-7 md:px-[72px] py-4 md:py-6 bg-white shadow-sm z-40 text-[#072E3F]">
             <div className="mx-auto max-w-[1800px] flex items-center justify-between flex-wrap gap-8">
-                <Link href="/">
-                    <Image src={logo} alt="OneOfOne Logo" className="max-w-[80px] hover:scale-105 transition-all" />
+                <Link href="/" className="hover:scale-105 transition-all flex items-center flex-col">
+                    <Image src={logo} alt="OneOfOne Logo" className="max-w-[80px] md:max-w-[110px]" />
+                    <small className="font-bold">Custom Posters</small>
                 </Link>
 
                 <nav className="hidden md:flex items-center gap-8 text-blue-100">

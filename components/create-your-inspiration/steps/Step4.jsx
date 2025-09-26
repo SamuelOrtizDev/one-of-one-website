@@ -112,8 +112,8 @@ export function Step4({ setUserChoice, userChoice }) {
             </div>
 
             <article className="flex flex-col items-center gap-4 mb-12 md:mb-0 lg:border-l border-blue-200/20 bg-transparent">
-                <div className={`border border-blue-100 m-auto rounded-xl shadow-sm shadow-blue-100/40 p-6 ${userChoice.orientation === "portrait" ? "aspect-[3/4] w-[200px] md:w-[230px]" : userChoice.orientation === "landscape" ? "aspect-[4/3] h-[200px] md:h-[230px]" : "aspect-square h-[230px] md:h-[270px]"} flex ${selectedQuotePosition ? selectedQuotePosition.position : "justify-center items-center"}`}>
-                    <strong className={userChoice.font ? selectedFont.className : ''}>
+                <div style={{backgroundImage: userChoice.imageUrl ? `url(${URL.createObjectURL(userChoice.imageUrl)})` : null}} className={`border border-blue-100 m-auto rounded-xl shadow-sm shadow-blue-100/40 p-6 ${userChoice.orientation === "portrait" ? "aspect-[3/4] w-[200px] md:w-[230px]" : userChoice.orientation === "landscape" ? "aspect-[4/3] h-[200px] md:h-[230px]" : "aspect-square h-[230px] md:h-[270px]"} flex bg-cover bg-center ${selectedQuotePosition ? selectedQuotePosition.position : "justify-center items-center"}`}>
+                    <strong className={`${userChoice.font ? selectedFont.className : ''} ${userChoice.fontColor === "Black" ? "text-black" : "text-white"}`}>
                         {
                             userChoice.quote
                         }
