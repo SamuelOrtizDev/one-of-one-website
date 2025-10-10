@@ -1,4 +1,5 @@
 'use client'
+import { Loader } from "@/components/common/Icons";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -79,21 +80,31 @@ export function AiStep6({ setUserChoice, userChoice }) {
             <p><strong>Step 6.</strong> Choose a quote</p>
             <p>take a look at this AI generated quotes based on your preferences. Whenever you are ready, choose one and continue</p>
 
-            <ul className="flex items-end gap-3 md:gap-6 justify-around pt-4 pb-6 md:py-6">
-                {
-                    quotes.map(quote => (
-                        <li key={quote}>
-                            <button onClick={() => selectPosterQuote(quote)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.posterQuote === quote ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
-                                {quote}
-                            </button>
-                        </li>
-                    ))
-                }
-            </ul>
+            {
+                isLoading ?
+                    <div className="grid place-items-center">
+                        <span className="animate-spin">
+                            <Loader />
+                        </span>
+                    </div>
+                    :
+                    <ul className="flex items-end gap-3 md:gap-6 justify-around pt-4 pb-6">
+                        {
+                            quotes.map(quote => (
+                                <li key={quote}>
+                                    <button onClick={() => selectPosterQuote(quote)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.posterQuote === quote ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                                        {quote}
+                                    </button>
+                                </li>
+                            ))
+                        }
+                    </ul>
+            }
 
-            <form onSubmit={handleRefine} className="pb-8 md:pb-0 gap-6 md:gap-16 md:mt-4">
-                <textarea disabled={isLoading} name="refineQuotesTextArea" placeholder="What are your expectations" className="resize-none bg-[#F8F8F8] rounded-lg p-4 outline-none border border-[#F8F8F8] focus:border-[#C9C9C9] w-full max-w-xl min-h-[100px]" />
-                <button>Refine quotes</button>
+            <form onSubmit={handleRefine} className={`pb-8 md:pb-0 gap-2 md:gap-4 md:mt-4 flex flex-col transition-all ${isLoading ? "opacity-0" : "opacity-100"}`}>
+                <p>You can still iterate from you results!! use this chat to let the AI what you want</p>
+                <textarea disabled={isLoading} name="refineQuotesTextArea" placeholder="Make them shorter..." className="resize-none bg-[#F8F8F8] rounded-lg p-4 outline-none border border-[#F8F8F8] focus:border-[#C9C9C9] w-full max-w-xl min-h-[100px]" />
+                <button disabled={isLoading} className="px-4 py-2 rounded-md bg-oOrange-200 text-white font-bold w-fit cursor-pointer">Refine quotes</button>
             </form>
         </motion.div>
     )
