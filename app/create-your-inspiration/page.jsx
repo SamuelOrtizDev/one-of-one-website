@@ -1,6 +1,6 @@
-import { MainFlow } from "@/components/create-your-inspiration/MainFlow";
+import { AiMainFlow } from "@/components/create-your-inspiration/AiMainFlow";
 
-export const createPageMetadata = {
+export const metadata = {
     title: "Create Your Inspiration - Custom Poster Designer | OneOfOne Posters",
     description: "Design your perfect wellness poster in 5 easy steps. Choose your inspirational quote, select from timeless imagery, customize fonts, sizes, and materials. Create your daily motivation masterpiece now.",
     keywords: "create custom poster, poster designer, custom quote poster, inspirational poster maker, wellness poster creator, personalized wall art, design your poster, motivational poster builder, custom print designer",
@@ -37,7 +37,7 @@ export const createPageMetadata = {
 export default function CreatingPage() {
     return (
         <>
-            <MainFlow />
+            <AiMainFlow/>
         </>
     )
 }
