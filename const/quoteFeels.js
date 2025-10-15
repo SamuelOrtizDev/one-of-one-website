@@ -1,26 +1,26 @@
 export default [
     {
-        label: "Inspirational",
-        value: "inspirational"
+        value: "overcome_friction",
+        label: "Overcome Inertia and Get Started (The 'Push')"
     },
     {
-        label: "Aggressive/Intense",
-        value: "aggressive"
+        value: "maintain_momentum",
+        label: "Maintain Consistency and Finish Strong (The 'Pace')"
     },
     {
-        label: "Calm/Zen",
-        value: "calm"
+        value: "embrace_failure",
+        label: "Reframe Failure and Build Resilience (The 'Bounce')"
     },
     {
-        label: "Humorous",
-        value: "humorous"
+        value: "cultivate_clarity",
+        label: "Achieve Mental Clarity and Simplify Focus (The 'Filter')"
     },
     {
-        label: "Professional",
-        value: "professional"
+        value: "practice_presence",
+        label: "Practice Mindfulness and Stay Present"
     },
     {
-        label: "Romantic",
-        value: "romantic"
+        value: "self_affirmation",
+        label: "Affirm Self-Worth and Personal Identity (The 'Self')"
     }
 ];

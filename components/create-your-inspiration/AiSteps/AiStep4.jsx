@@ -23,7 +23,7 @@ export function AiStep4({ setUserChoice, userChoice }) {
                 {
                     quoteFeels.map(({ label, value }) => (
                         <li key={value}>
-                            <button onClick={() => selectQuoteFeel(value)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.quoteFeel === value ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                            <button onClick={() => selectQuoteFeel(label)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.quoteFeel === label ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
                                 {label}
                             </button>
                         </li>

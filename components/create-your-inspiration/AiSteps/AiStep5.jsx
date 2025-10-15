@@ -1,13 +1,31 @@
 'use client'
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import textTypes from "@/const/textTypes";
+import { useState } from "react";
 
 export function AiStep5({ setUserChoice, userChoice }) {
+    const [isPersonalQuote, setIsPersonalQuote] = useState(false)
 
     const selectTextType = (value) => {
+        setIsPersonalQuote(false)
         setUserChoice(prev => ({
             ...prev,
             textType: value
+        }))
+    }
+
+    const handlePersonalQuote = (e) => {
+        setUserChoice(prev => ({
+            ...prev,
+            posterQuote: e.target.value
+        }))
+    }
+
+    const handlePersonalMessageClick = () => {
+        setIsPersonalQuote(true)
+        setUserChoice(prev => ({
+            ...prev,
+            textType: "Custom Quote"
         }))
     }
 
@@ -23,13 +41,31 @@ export function AiStep5({ setUserChoice, userChoice }) {
                 {
                     textTypes.map(({ label, value }) => (
                         <li key={value}>
-                            <button onClick={() => selectTextType(value)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.textType === value ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                            <button onClick={() => selectTextType(label)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.textType === label ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
                                 {label}
                             </button>
                         </li>
                     ))
                 }
+                <li>
+                    <button onClick={handlePersonalMessageClick} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${isPersonalQuote ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                        Personal Message
+                    </button>
+                </li>
             </ul>
+
+            <AnimatePresence>
+                {
+                    isPersonalQuote &&
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        className="pb-8 md:pb-0 gap-6 md:gap-16 md:mt-4">
+                        <textarea value={userChoice.posterQuote} onChange={handlePersonalQuote} name="personal_quote" placeholder="Type your quote..." id="personal_quote" className="resize-none bg-[#F8F8F8] rounded-lg p-4 outline-none border border-[#F8F8F8] focus:border-[#C9C9C9] w-full max-w-xl min-h-[100px]" />
+                    </motion.div>
+                }
+            </AnimatePresence>
         </motion.div>
     )
 }

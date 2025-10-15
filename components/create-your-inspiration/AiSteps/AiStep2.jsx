@@ -1,12 +1,13 @@
 'use client'
 import { motion } from "framer-motion";
+import hurdles from "@/const/hurdles";
 
 export function AiStep2({ setUserChoice, userChoice }) {
 
-    const handleHurdles = (e) => {
+    const handleHurdles = (value) => {
         setUserChoice(prev => ({
             ...prev,
-            hurdles: e.target.value
+            hurdles: value
         }));
     };
 
@@ -18,9 +19,17 @@ export function AiStep2({ setUserChoice, userChoice }) {
             <h3 className="font-bold text-2xl md:text-4xl">Let's <span className="text-blue-200">Empathize</span></h3>
             <p><strong>Step 2.</strong> Tell us about your hurdles</p>
 
-            <div className="pb-8 md:pb-0 gap-6 md:gap-16 md:mt-4">
-                <textarea value={userChoice.hurdles} onChange={handleHurdles} name="hurdles" placeholder="What it's tough for you..." id="hurdles" className="resize-none bg-[#F8F8F8] rounded-lg p-4 outline-none border border-[#F8F8F8] focus:border-[#C9C9C9] w-full max-w-xl min-h-[100px]" />
-            </div>
+            <ul className="flex items-end gap-3 md:gap-6 pt-4 pb-6 md:py-6 flex-wrap">
+                {
+                    hurdles.map(({ label, value }) => (
+                        <li key={value}>
+                            <button onClick={() => handleHurdles(label)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.hurdles === label ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                                {label}
+                            </button>
+                        </li>
+                    ))
+                }
+            </ul>
         </motion.div>
     )
 }

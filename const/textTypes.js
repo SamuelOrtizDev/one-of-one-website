@@ -1,26 +1,10 @@
 export default [
     {
-        label: "Motivational Phrase",
-        value: "motivational_phrase"
+        label: "Real-life quote",
+        value: "real_life_quote"
     },
     {
-        label: "Famous Quote",
-        value: "famous_quote"
+        label: "Message (not claimed by anyone)",
+        value: "message"
     },
-    {
-        label: "Custom Text",
-        value: "custom_text"
-    },
-    {
-        label: "Name/Important Date",
-        value: "name_date"
-    },
-    {
-        label: "Poem or Verse",
-        value: "poem"
-    },
-    {
-        label: "Keywords/Affirmations",
-        value: "keywords"
-    }
 ];

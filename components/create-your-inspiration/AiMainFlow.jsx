@@ -1,5 +1,5 @@
 'use client'
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { ArrowRight, X } from "../common/Icons";
 import { AnimatePresence, motion } from "framer-motion";
 import sign from "./assets/sign.svg"
@@ -10,100 +10,182 @@ import { AiStep2 } from "./AiSteps/AiStep2";
 import { AiStep3 } from "./AiSteps/AiStep3";
 import { AiStep4 } from "./AiSteps/AiStep4";
 import { AiStep5 } from "./AiSteps/AiStep5";
+import { AiQuoteStep6 } from "./AiSteps/AiQuoteStep6";
 import { AiStep6 } from "./AiSteps/AiStep6";
+import { AiStep7 } from "./AiSteps/AiStep7";
+import { AiStep8 } from "./AiSteps/AiStep8";
+import { AiStep9 } from "./AiSteps/AiStep9";
+import { AiImageStep } from "./AiSteps/AiImageStep";
 
 export function AiMainFlow() {
 
-    const totalSteps = 6
-    const initialStep = 1
-    const [step, setStep] = useState(initialStep)
+    const PHASES = {
+        INTERESTS: 'interests',
+        HURDLES: 'hurdles',
+        PURPOSE: 'purpose',
+        FEEL: 'feel',
+        TEXT_TYPE: 'textType',
+        QUOTE: 'quote',
+        ART_STYLE: 'artStyle',
+        COLOR_PALETTE: "colorPalette",
+        FEELING: 'feeling',
+        EXCLUSIONS: 'exclusions',
+        IMAGES: "images",
+        FINAL: "final"
+    }
+
     const [isFinalStep, setIsFinalStep] = useState(false)
+    const [currentPhase, setCurrentPhase] = useState(PHASES.INTERESTS)
     const [userChoice, setUserChoice] = useState({
-        interests: "",
-        hurdles: "",
-        posterPurpose: "",
+        interests: null,
+        hurdles: null,
+        posterPurpose: null,
         quoteFeel: null,
         textType: null,
-        posterQuote: ""
+        posterQuote: "",
+        artStyle: null,
+        colorPalette: null,
+        feeling: null,
+        exclusions: [],
+        image: null
     })
 
-    const isStepValid = useMemo(() => {
-        switch (step) {
-            case 1: {
-                const interests = userChoice.interests.trim()
-                return interests !== "" && interests.length >= 10
-            }
-            case 2: {
-                const hurdles = userChoice.hurdles.trim()
-                return hurdles !== "" && hurdles.length >= 10
-            }
-            case 3: {
-                const posterPurpose = userChoice.posterPurpose.trim()
-                return posterPurpose !== "" && posterPurpose.length >= 10
-            }
-            case 4: return userChoice.quoteFeel != null
-            case 5: return userChoice.textType != null
-            default: return false;
+    const getPhaseFlow = useCallback(() => {
+        const baseFlow = [
+            PHASES.INTERESTS,
+            PHASES.HURDLES,
+            PHASES.PURPOSE,
+            PHASES.FEEL,
+            PHASES.TEXT_TYPE
+        ]
+
+        if (userChoice.textType !== "Custom Quote") {
+            baseFlow.push(PHASES.QUOTE)
         }
-    }, [step, userChoice]);
+
+        baseFlow.push(
+            PHASES.ART_STYLE,
+            PHASES.COLOR_PALETTE,
+            PHASES.FEELING,
+            PHASES.EXCLUSIONS,
+            PHASES.IMAGES,
+            PHASES.FINAL
+        )
+
+        return baseFlow
+    }, [userChoice.textType])
+
+    const phaseFlow = useMemo(() => getPhaseFlow(), [getPhaseFlow])
+    const currentStepNumber = phaseFlow.indexOf(currentPhase) + 1
+    const totalSteps = phaseFlow.length
+
+    const isStepValid = useMemo(() => {
+        switch (currentPhase) {
+            case PHASES.INTERESTS:
+                return userChoice.interests !== null
+            case PHASES.HURDLES:
+                return userChoice.hurdles !== null
+            case PHASES.PURPOSE:
+                return userChoice.posterPurpose !== null
+            case PHASES.FEEL:
+                return userChoice.quoteFeel !== null
+            case PHASES.TEXT_TYPE: {
+                if (userChoice.textType === "Custom Quote") {
+                    return userChoice.posterQuote.trim().length > 10
+                }
+                return userChoice.textType !== null
+            }
+            case PHASES.QUOTE:
+                return userChoice.posterQuote.trim() !== ""
+            case PHASES.ART_STYLE:
+                return userChoice.artStyle !== null
+            case PHASES.COLOR_PALETTE:
+                return userChoice.colorPalette !== null
+            case PHASES.FEELING:
+                return userChoice.feeling !== null
+            case PHASES.EXCLUSIONS:
+                return userChoice.exclusions.length !== 0
+            default:
+                return false
+        }
+    }, [currentPhase, userChoice])
 
     const nextStep = () => {
-        if (isStepValid) setStep(step + 1)
+        if (!isStepValid) return
+
+        const currentIndex = phaseFlow.indexOf(currentPhase)
+        if (currentIndex < phaseFlow.length - 1) {
+            setCurrentPhase(phaseFlow[currentIndex + 1])
+        } else {
+            setIsFinalStep(true)
+        }
     }
 
-    const previuosStep = () => {
-        setStep(step - 1)
+    const previousStep = () => {
+        const currentIndex = phaseFlow.indexOf(currentPhase)
+        if (currentIndex > 0) {
+            setCurrentPhase(phaseFlow[currentIndex - 1])
+        }
     }
+
+    useEffect(() => {
+        console.log(userChoice);
+    }, [userChoice])
 
     return (
         <div className={`transition-all md:bg-gradient-to-b ${isFinalStep ? "from-[#FFE9CA] to-[#FFA943]" : "from-white to-[#76B8D6]"} bg-cover bg-center`}>
             <section className='min-h-screen text-blue-200 mx-auto max-w-[1600px] px-7 md:px-[72px] py-12 md:py-20'>
-                <div className={`rounded-2xl bg-white relative mt-12 ${isFinalStep ? "w-fit mx-auto md:px-12 py-2 md:py-8" : "w-full md:p-8"}`}>
+                <div className={`rounded-2xl bg-white transition-all relative mt-12 ${isFinalStep ? "w-fit mx-auto md:px-12 py-2 md:py-8" : "w-full md:p-8"}`}>
                     {
-                        !(isFinalStep && (userChoice.bestFit || userChoice.imageDescription.trim() !== "")) &&
+                        !isFinalStep &&
                         <Link href="/" className="absolute left-0 md:left-4 -top-16 md:-top-10 flex items-center gap-1 transition-all hover:underline hover:text-red-500">
                             <X />
                             Cancel Creation
                         </Link>
                     }
-                    {/* Simple Steps Slider */}
-                    {
-                        !isFinalStep &&
-                        <div className="relative flex flex-col gap-2 max-w-[200px]">
-                            <div className="h-2 bg-gray-200 rounded-full relative">
-                                <motion.div
-                                    className="h-full bg-blue-200 rounded-full"
-                                    animate={{ width: `${((step - 1) / (totalSteps - 1)) * 100}%` }}
-                                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                                />
-                            </div>
-
-                            <div className="flex justify-between absolute -top-1 w-full">
-                                {Array.from({ length: totalSteps }, (_, index) => (
-                                    <motion.div
-                                        key={index + 1}
-                                        className={`w-4 h-4 rounded-full ${(index + 1) <= step ? 'bg-orange-500' : 'bg-gray-300'
-                                            }`}
-                                        animate={{ backgroundColor: (index + 1) <= step ? '#F97316' : '#D1D5DB' }}
-                                        transition={{ duration: 0.3 }}
-                                    />
-                                ))}
-                            </div>
-
-                            <span>
-                                <p><strong>{step}</strong> of {totalSteps}</p>
-                            </span>
-                        </div>
-                    }
 
                     <AnimatePresence>
                         <div>
-                            {(step === 1 && !isFinalStep) && <AiStep1 userChoice={userChoice} setUserChoice={setUserChoice} />}
-                            {(step === 2 && !isFinalStep) && <AiStep2 userChoice={userChoice} setUserChoice={setUserChoice} />}
-                            {(step === 3 && !isFinalStep) && <AiStep3 userChoice={userChoice} setUserChoice={setUserChoice} />}
-                            {(step === 4 && !isFinalStep) && <AiStep4 userChoice={userChoice} setUserChoice={setUserChoice} />}
-                            {(step === 5 && !isFinalStep) && <AiStep5 userChoice={userChoice} setUserChoice={setUserChoice} />}
-                            {(step === 6 && !isFinalStep) && <AiStep6 userChoice={userChoice} setUserChoice={setUserChoice} />}
+                            {currentPhase === PHASES.INTERESTS && !isFinalStep && (
+                                <AiStep1 userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+
+                            {currentPhase === PHASES.HURDLES && !isFinalStep && (
+                                <AiStep2 userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+
+                            {currentPhase === PHASES.PURPOSE && !isFinalStep && (
+                                <AiStep3 userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+
+                            {currentPhase === PHASES.FEEL && !isFinalStep && (
+                                <AiStep4 userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+
+                            {currentPhase === PHASES.TEXT_TYPE && !isFinalStep && (
+                                <AiStep5 userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+
+                            {currentPhase === PHASES.QUOTE && !isFinalStep && (
+                                <AiQuoteStep6 userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+
+                            {currentPhase === PHASES.ART_STYLE && !isFinalStep && (
+                                <AiStep6 userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+
+                            {currentPhase === PHASES.COLOR_PALETTE && !isFinalStep && (
+                                <AiStep7 userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+                            {currentPhase === PHASES.FEELING && !isFinalStep && (
+                                <AiStep8 userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+                            {currentPhase === PHASES.EXCLUSIONS && !isFinalStep && (
+                                <AiStep9 userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+                            {currentPhase === PHASES.IMAGES && !isFinalStep && (
+                                <AiImageStep userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
                         </div>
                     </AnimatePresence>
 
@@ -112,17 +194,16 @@ export function AiMainFlow() {
                         !isFinalStep &&
                         <span className="flex items-center justify-between md:justify-start gap-2">
                             {
-                                (step != initialStep) &&
-                                <button onClick={previuosStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-blue-200 to-blue-100 group flex flex-row-reverse items-center gap-4 text-white h-fit">
+                                (currentStepNumber !== 1) &&
+                                <button onClick={previousStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-blue-200 to-blue-100 group flex flex-row-reverse items-center gap-4 text-white h-fit">
                                     Back
                                     <span className="group-hover:-translate-x-1 transition-transform rotate-180">
                                         <ArrowRight />
                                     </span>
                                 </button>
                             }
-
                             {
-                                (step != totalSteps) &&
+                                (currentStepNumber !== totalSteps) &&
                                 <button disabled={!isStepValid} onClick={nextStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-oOrange-100 to-oOrange-200 group flex items-center gap-4 text-white h-fit disabled:saturate-0 disabled:cursor-not-allowed">
                                     Continue
                                     <span className="group-hover:translate-x-1 transition-transform">
@@ -130,9 +211,8 @@ export function AiMainFlow() {
                                     </span>
                                 </button>
                             }
-
                             {
-                                (step === totalSteps) &&
+                                (currentStepNumber === totalSteps) &&
                                 <button disabled={!isStepValid} onClick={() => setIsFinalStep(true)} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-oOrange-100 to-oOrange-200 group flex items-center gap-4 text-white h-fit disabled:saturate-0 disabled:cursor-not-allowed">
                                     Continue to final
                                     <span className="group-hover:translate-x-1 transition-transform">

@@ -1,12 +1,13 @@
 'use client'
 import { motion } from "framer-motion";
+import interests from "@/const/interests";
 
 export function AiStep1({ setUserChoice, userChoice }) {
 
-    const handleInterests = (e) => {
+    const handleInterests = (value) => {
         setUserChoice(prev => ({
             ...prev,
-            interests: e.target.value
+            interests: value
         }));
     };
 
@@ -18,9 +19,17 @@ export function AiStep1({ setUserChoice, userChoice }) {
             <h3 className="font-bold text-2xl md:text-4xl">Let's Meet <span className="text-blue-200">Each Other</span></h3>
             <p><strong>Step 1.</strong> Tell us about your interests</p>
 
-            <div className="pb-8 md:pb-0 gap-6 md:gap-16 md:mt-4">
-                <textarea value={userChoice.interests} onChange={handleInterests} name="interests" placeholder="What you like the most..." id="interests" className="resize-none bg-[#F8F8F8] rounded-lg p-4 outline-none border border-[#F8F8F8] focus:border-[#C9C9C9] w-full max-w-xl min-h-[100px]" />
-            </div>
+            <ul className="flex items-end gap-3 md:gap-6 pt-4 pb-6 md:py-6 flex-wrap">
+                {
+                    interests.map(({ label, value }) => (
+                        <li key={value}>
+                            <button onClick={() => handleInterests(label)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.interests === label ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                                {label}
+                            </button>
+                        </li>
+                    ))
+                }
+            </ul>
         </motion.div>
     )
 }

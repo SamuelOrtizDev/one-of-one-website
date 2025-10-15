@@ -1,12 +1,13 @@
 'use client'
 import { motion } from "framer-motion";
+import posterPurposes from "@/const/posterPurposes";
 
 export function AiStep3({ setUserChoice, userChoice }) {
 
-    const handlePosterPurpose = (e) => {
+    const handlePosterPurpose = (value) => {
         setUserChoice(prev => ({
             ...prev,
-            posterPurpose: e.target.value
+            posterPurpose: value
         }));
     };
 
@@ -18,9 +19,17 @@ export function AiStep3({ setUserChoice, userChoice }) {
             <h3 className="font-bold text-2xl md:text-4xl">Let's <span className="text-blue-200">Concise</span></h3>
             <p><strong>Step 3.</strong> Tell us the purpose of your poster</p>
 
-            <div className="pb-8 md:pb-0 gap-6 md:gap-16 md:mt-4">
-                <textarea value={userChoice.posterPurpose} onChange={handlePosterPurpose} name="posterPurpose" placeholder="What are your expectations" id="posterPurpose" className="resize-none bg-[#F8F8F8] rounded-lg p-4 outline-none border border-[#F8F8F8] focus:border-[#C9C9C9] w-full max-w-xl min-h-[100px]" />
-            </div>
+            <ul className="flex items-end gap-3 md:gap-6 pt-4 pb-6 md:py-6">
+                {
+                    posterPurposes.map(({ label, value }) => (
+                        <li key={value}>
+                            <button onClick={() => handlePosterPurpose(label)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.posterPurpose === label ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                                {label}
+                            </button>
+                        </li>
+                    ))
+                }
+            </ul>
         </motion.div>
     )
 }
