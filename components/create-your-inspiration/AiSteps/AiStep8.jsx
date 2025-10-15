@@ -1,7 +1,7 @@
 'use client'
 import { motion } from "framer-motion";
-import colorPalettes from "@/const/colorPalettes";
 import getRealStep from "@/lib/getRealStep";
+import feelings from "@/const/feelings";
 
 export function AiStep8({ setUserChoice, userChoice }) {
 
@@ -22,7 +22,7 @@ export function AiStep8({ setUserChoice, userChoice }) {
 
             <ul className="flex items-end gap-3 md:gap-6 pt-4 pb-6 md:py-6">
                 {
-                    colorPalettes.map(({ label, value }) => (
+                    feelings.map(({ label, value }) => (
                         <li key={value}>
                             <button onClick={() => selectPosterFeel(label)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.feeling === label ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
                                 {label}

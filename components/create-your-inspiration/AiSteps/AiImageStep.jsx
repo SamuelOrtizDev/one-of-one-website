@@ -17,14 +17,14 @@ export function AiImageStep({ setUserChoice, userChoice }) {
         exclusions
     }
 
-    // useEffect(() => {
-    //     if (userChoice.image === null|| !lastGeneration) {
-    //         generateImages();
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (userChoice.image === null|| !lastGeneration) {
+            generateImages();
+        }
+    }, []);
 
     const generateImages = async (userFeedback = null) => {
-        setIsLoading(true);
+        // setIsLoading(true);
 
         try {
             const res = await fetch('/api/generate-images', {
@@ -40,14 +40,17 @@ export function AiImageStep({ setUserChoice, userChoice }) {
             });
 
             const data = await res.json();
-            const newImages = data.images.split('\n').filter(quote => quote.trim() !== '');
+            // const newImages = data.images.split('\n').filter(quote => quote.trim() !== '');
 
-            setImages(newImages);
+            // setImages(newImages);
 
-            setLastGeneration({
-                images: newImages,
-                feedback: userFeedback
-            });
+            console.log(data);
+            
+
+            // setLastGeneration({
+            //     images: newImages,
+            //     feedback: userFeedback
+            // });
 
         } catch (error) {
             console.error('Error:', error);
@@ -75,7 +78,6 @@ export function AiImageStep({ setUserChoice, userChoice }) {
             image: value
         }))
     }
-
 
     return (
         <motion.div initial={{ top: 100, opacity: 0 }}
