@@ -3,9 +3,10 @@ import { Loader } from "@/components/common/Icons";
 import getRealStep from "@/lib/getRealStep";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Image } from "@/components/ai-elements/image";
 
 export function AiImageStep({ setUserChoice, userChoice }) {
-    const [images, setImages] = useState([]);
+    const [image, setImage] = useState({});
     const [lastGeneration, setLastGeneration] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -24,7 +25,7 @@ export function AiImageStep({ setUserChoice, userChoice }) {
     }, []);
 
     const generateImages = async (userFeedback = null) => {
-        // setIsLoading(true);
+        setIsLoading(true);
 
         try {
             const res = await fetch('/api/generate-images', {
@@ -40,17 +41,13 @@ export function AiImageStep({ setUserChoice, userChoice }) {
             });
 
             const data = await res.json();
-            // const newImages = data.images.split('\n').filter(quote => quote.trim() !== '');
-
-            // setImages(newImages);
-
+            setImage(data.image);
             console.log(data);
-            
 
-            // setLastGeneration({
-            //     images: newImages,
-            //     feedback: userFeedback
-            // });
+            setLastGeneration({
+                prompt: data.prompt,
+                feedback: userFeedback
+            });
 
         } catch (error) {
             console.error('Error:', error);
@@ -97,15 +94,15 @@ export function AiImageStep({ setUserChoice, userChoice }) {
                     </div>
                     :
                     <ul className="flex items-end gap-3 md:gap-6 pt-4 pb-6 flex-wrap">
-                        {
-                            images.map(quote => (
-                                <li key={quote}>
-                                    <button onClick={() => selectImage(quote)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.posterQuote === quote ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
-                                        {quote}
-                                    </button>
-                                </li>
-                            ))
-                        }
+                        <li>
+                            <Image
+                                base64={image.base64Data}
+                                mediaType={image.mediaType}
+                                uint8Array={new Uint8Array()}
+                                alt="generated AI Image"
+                                className="w-full max-w-xl"
+                            />
+                        </li>
                     </ul>
             }
 

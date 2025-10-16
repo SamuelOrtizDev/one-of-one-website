@@ -1,5 +1,5 @@
 'use client'
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { ArrowRight, X } from "../common/Icons";
 import { AnimatePresence, motion } from "framer-motion";
 import sign from "./assets/sign.svg"

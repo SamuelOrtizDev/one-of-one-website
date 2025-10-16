@@ -5,11 +5,16 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
     try {
         const { userInput, lastGeneration, userFeedback } = await request.json()
-        let prompt
-
-        if (!lastGeneration) {
+        const basePrompt = `Generate an image in ${userInput.artStyle} art style with a ${userInput.colorPalette} color palette that conveys a ${userInput.feeling} feeling. Technical details: high resolution, 16/9 aspect-ratio, professional lighting, detailed composition. No text, no watermarks${userInput.exclusions && userInput.exclusions.length > 0 ? userInput.exclusions.map(item => `, ${item}`).join('') : ''}.`;
+        let prompt = basePrompt
+        
+        if (lastGeneration) {
+            prompt = `You previously generated an image with this prompt: 
+            ${prompt}
+            
+            The user wants to refine them with this feedback: 
+            "${userFeedback}`
         }
-        prompt = `Generate an image in ${userInput.artStyle} art style with a ${userInput.colorPalette} color palette that conveys a ${userInput.feeling} feeling. Technical details: high resolution, professional lighting, detailed composition. No text, no watermarks${userInput.exclusions && userInput.exclusions.length > 0 ? userInput.exclusions.map(item => `, ${item}`).join('') : ''}.`;
 
         const { files } = await generateText({
             model: google('gemini-2.5-flash-image-preview'),
@@ -20,7 +25,7 @@ export async function POST(request) {
                 }
             }
         })
-        return NextResponse.json({ images: files[0] || null })
+        return NextResponse.json({ image: files[0] || null, prompt })
 
     } catch (error) {
         console.error(error)
