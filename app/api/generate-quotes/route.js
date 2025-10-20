@@ -9,7 +9,7 @@ export async function POST(request) {
         if (!lastGeneration) {
             prompt = `You are a creative assistant that generates motivational quotes for posters. Generate exactly 6 quotes based on the user preferences below.
 
-IMPORTANT: Return ONLY the 6 quotes, one per line, with no numbering, no explanations, no introduction, and no extra text. If Text Type is 'Real-life quote' find a quote from the the internet that matches user standards. if Text Type is 'Message (not claimed by anyone)' generate your own options.
+IMPORTANT: Return ONLY the 6 quotes, one per line, with no numbering, no explanations, no introduction, and no extra text. If Text Type is 'Real-life quote' find a quote from the the internet that matches user standards. if Text Type is 'Message (not claimed by anyone)' generate your own options. the quotes MUST be 5-6 words only, short sentences.
 
 User Preferences:
 - Interests: ${userInput.interests}

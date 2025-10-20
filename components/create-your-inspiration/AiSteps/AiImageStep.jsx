@@ -4,30 +4,32 @@ import getRealStep from "@/lib/getRealStep";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Image } from "@/components/ai-elements/image";
+import base64ToFile from "@/lib/base64ToFile";
 
 export function AiImageStep({ setUserChoice, userChoice }) {
-    const [image, setImage] = useState({});
+    const [image, setImage] = useState(null);
     const [lastGeneration, setLastGeneration] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { artStyle, colorPalette, feeling, exclusions } = userChoice
+    const { artStyle, colorPalette, feeling, exclusions, posterQuote } = userChoice
     const promptObject = {
         artStyle,
         colorPalette,
         feeling,
-        exclusions
+        exclusions,
+        posterQuote
     }
 
     useEffect(() => {
-        if (userChoice.image === null|| !lastGeneration) {
+        if (userChoice.image === null || !lastGeneration) {
             generateImages();
         }
     }, []);
 
     const generateImages = async (userFeedback = null) => {
-        setIsLoading(true);
-
         try {
+            setImage(null)
+            setIsLoading(true);
             const res = await fetch('/api/generate-images', {
                 method: 'POST',
                 headers: {
@@ -41,6 +43,20 @@ export function AiImageStep({ setUserChoice, userChoice }) {
             });
 
             const data = await res.json();
+
+            if (data.image?.base64Data) {
+                const imageFile = base64ToFile(
+                    data.image.base64Data,
+                    'generated-image.png',
+                    data.image.mediaType || 'image/png'
+                );
+
+                setUserChoice(prev => ({
+                    ...prev,
+                    image: imageFile
+                }));
+            }
+
             setImage(data.image);
             console.log(data);
 
@@ -82,7 +98,7 @@ export function AiImageStep({ setUserChoice, userChoice }) {
             exit={{ top: 100, opacity: 0 }}
             transition={{ duration: 0.4 }} className="flex flex-col gap-4 text-[#072E3F] py-8">
             <h3 className="font-bold text-2xl md:text-4xl">Let's give it <span className="text-blue-200">Shape</span></h3>
-            <p><strong>Step {getRealStep(10, userChoice)}.</strong> Choose an image with the help of AI!</p>
+            <p><strong>Step {getRealStep(11, userChoice)}.</strong> Choose an image with the help of AI!</p>
             <p>take a look at this AI generated images based on your preferences. Whenever you are ready, choose one and continue</p>
 
             {
@@ -92,7 +108,7 @@ export function AiImageStep({ setUserChoice, userChoice }) {
                             <Loader />
                         </span>
                     </div>
-                    :
+                    : image &&
                     <ul className="flex items-end gap-3 md:gap-6 pt-4 pb-6 flex-wrap">
                         <li>
                             <Image

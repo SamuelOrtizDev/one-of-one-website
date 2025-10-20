@@ -1,5 +1,5 @@
 'use client'
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { ArrowRight, X } from "../common/Icons";
 import { AnimatePresence, motion } from "framer-motion";
 import sign from "./assets/sign.svg"
@@ -16,6 +16,9 @@ import { AiStep7 } from "./AiSteps/AiStep7";
 import { AiStep8 } from "./AiSteps/AiStep8";
 import { AiStep9 } from "./AiSteps/AiStep9";
 import { AiImageStep } from "./AiSteps/AiImageStep";
+import { AiOrientation } from "./AiSteps/AiOrientation";
+import { AiPaperType } from "./AiSteps/AiPaperType";
+import { FinalStep } from "./AiSteps/FinalStep";
 
 export function AiMainFlow() {
 
@@ -30,11 +33,12 @@ export function AiMainFlow() {
         COLOR_PALETTE: "colorPalette",
         FEELING: 'feeling',
         EXCLUSIONS: 'exclusions',
+        DIMENSIONS: 'dimensions',
         IMAGES: "images",
+        PAPER_TYPE: "paper_type",
         FINAL: "final"
     }
 
-    const [isFinalStep, setIsFinalStep] = useState(false)
     const [currentPhase, setCurrentPhase] = useState(PHASES.INTERESTS)
     const [userChoice, setUserChoice] = useState({
         interests: null,
@@ -47,8 +51,14 @@ export function AiMainFlow() {
         colorPalette: null,
         feeling: null,
         exclusions: [],
-        image: null
+        orientation: null,
+        size: null,
+        image: null,
+        material: null,
+        frame: false,
+        frameColor: null
     })
+    const isFinalStep = currentPhase === PHASES.FINAL
 
     const getPhaseFlow = useCallback(() => {
         const baseFlow = [
@@ -68,7 +78,9 @@ export function AiMainFlow() {
             PHASES.COLOR_PALETTE,
             PHASES.FEELING,
             PHASES.EXCLUSIONS,
+            PHASES.DIMENSIONS,
             PHASES.IMAGES,
+            PHASES.PAPER_TYPE,
             PHASES.FINAL
         )
 
@@ -105,6 +117,15 @@ export function AiMainFlow() {
                 return userChoice.feeling !== null
             case PHASES.EXCLUSIONS:
                 return userChoice.exclusions.length !== 0
+            case PHASES.DIMENSIONS:
+                return userChoice.orientation !== null && userChoice.size !== null
+            case PHASES.IMAGES:
+                return userChoice.image !== null
+            case PHASES.PAPER_TYPE:
+                return (
+                    userChoice.material !== null &&
+                    (!userChoice.frame || userChoice.frameColor !== null)
+                );
             default:
                 return false
         }
@@ -128,6 +149,10 @@ export function AiMainFlow() {
         }
     }
 
+    useEffect(() => {
+        console.log(userChoice);
+    }, [userChoice])
+
     return (
         <div className={`transition-all md:bg-gradient-to-b ${isFinalStep ? "from-[#FFE9CA] to-[#FFA943]" : "from-white to-[#76B8D6]"} bg-cover bg-center`}>
             <section className='min-h-screen text-blue-200 mx-auto max-w-[1600px] px-7 md:px-[72px] py-12 md:py-20'>
@@ -142,45 +167,54 @@ export function AiMainFlow() {
 
                     <AnimatePresence>
                         <div>
-                            {currentPhase === PHASES.INTERESTS && !isFinalStep && (
+                            {currentPhase === PHASES.INTERESTS && (
                                 <AiStep1 userChoice={userChoice} setUserChoice={setUserChoice} />
                             )}
 
-                            {currentPhase === PHASES.HURDLES && !isFinalStep && (
+                            {currentPhase === PHASES.HURDLES && (
                                 <AiStep2 userChoice={userChoice} setUserChoice={setUserChoice} />
                             )}
 
-                            {currentPhase === PHASES.PURPOSE && !isFinalStep && (
+                            {currentPhase === PHASES.PURPOSE && (
                                 <AiStep3 userChoice={userChoice} setUserChoice={setUserChoice} />
                             )}
 
-                            {currentPhase === PHASES.FEEL && !isFinalStep && (
+                            {currentPhase === PHASES.FEEL && (
                                 <AiStep4 userChoice={userChoice} setUserChoice={setUserChoice} />
                             )}
 
-                            {currentPhase === PHASES.TEXT_TYPE && !isFinalStep && (
+                            {currentPhase === PHASES.TEXT_TYPE && (
                                 <AiStep5 userChoice={userChoice} setUserChoice={setUserChoice} />
                             )}
 
-                            {currentPhase === PHASES.QUOTE && !isFinalStep && (
+                            {currentPhase === PHASES.QUOTE && (
                                 <AiQuoteStep6 userChoice={userChoice} setUserChoice={setUserChoice} />
                             )}
 
-                            {currentPhase === PHASES.ART_STYLE && !isFinalStep && (
+                            {currentPhase === PHASES.ART_STYLE && (
                                 <AiStep6 userChoice={userChoice} setUserChoice={setUserChoice} />
                             )}
 
-                            {currentPhase === PHASES.COLOR_PALETTE && !isFinalStep && (
+                            {currentPhase === PHASES.COLOR_PALETTE && (
                                 <AiStep7 userChoice={userChoice} setUserChoice={setUserChoice} />
                             )}
-                            {currentPhase === PHASES.FEELING && !isFinalStep && (
+                            {currentPhase === PHASES.FEELING && (
                                 <AiStep8 userChoice={userChoice} setUserChoice={setUserChoice} />
                             )}
-                            {currentPhase === PHASES.EXCLUSIONS && !isFinalStep && (
+                            {currentPhase === PHASES.EXCLUSIONS && (
                                 <AiStep9 userChoice={userChoice} setUserChoice={setUserChoice} />
                             )}
-                            {currentPhase === PHASES.IMAGES && !isFinalStep && (
+                            {currentPhase === PHASES.DIMENSIONS && (
+                                <AiOrientation userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+                            {currentPhase === PHASES.IMAGES && (
                                 <AiImageStep userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+                            {currentPhase === PHASES.PAPER_TYPE && (
+                                <AiPaperType userChoice={userChoice} setUserChoice={setUserChoice} />
+                            )}
+                            {currentPhase === PHASES.FINAL && (
+                                <FinalStep userChoice={userChoice} previousStep={previousStep} />
                             )}
                         </div>
                     </AnimatePresence>
