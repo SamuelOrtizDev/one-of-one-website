@@ -22,8 +22,8 @@ export function AiStep6({ setUserChoice, userChoice }) {
             <ul className="flex items-end gap-3 md:gap-6 pt-4 pb-6 md:py-6 flex-wrap">
                 {
                     artStyles.map(({ label, value }) => (
-                        <li key={value}>
-                            <button onClick={() => selectArtStyle(label)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.artStyle === label ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                        <li key={label}>
+                            <button onClick={() => selectArtStyle(value)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.artStyle === value ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
                                 {label}
                             </button>
                         </li>

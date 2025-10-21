@@ -24,7 +24,7 @@ export function AiStep7({ setUserChoice, userChoice }) {
                 {
                     colorPalettes.map(({ label, value }) => (
                         <li key={value}>
-                            <button onClick={() => selectColorPalette(label)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.colorPalette === label ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                            <button onClick={() => selectColorPalette(value)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.colorPalette === value ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
                                 {label}
                             </button>
                         </li>

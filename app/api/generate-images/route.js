@@ -5,13 +5,34 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
     try {
         const { userInput, lastGeneration, userFeedback } = await request.json()
-        const basePrompt = `Generate a poster with background image in ${userInput.artStyle} art style with a ${userInput.colorPalette} color palette that conveys a ${userInput.feeling} feeling. 
+        const basePrompt = `Generate a poster with background image based on the following specifications:
 
-Technical requirements for background: high resolution, professional lighting, detailed composition, smooth and balanced design suitable as a backdrop. No watermarks, no distracting elements that would interfere with overlay text. The generated image MUST have this dimensions: ${userInput.orientation === 'portrait' ? 'portrait (9/16)' : 'landscape (16/9)'}${userInput.exclusions && userInput.exclusions.length > 0 ? `. Exclude: ${userInput.exclusions.join(', ')}` : ''}.
+        Art Style: ${userInput.artStyle}
+        Color Palette: ${userInput.colorPalette}
+        Overall Feeling: ${userInput.feeling}
 
-Poster quote to display as overlay text: "${userInput.posterQuote}"
+        User Context:
+        - Interests: ${userInput.interests.join('. ')}
+        - Hurdles/Challenges: ${userInput.hurdles}
+        - Poster Purpose: ${userInput.posterPurpose}
+        - Quote Tone: ${userInput.quoteFeel}
 
-Generate ONLY the poster image with the background and the overlay text. Make sure its on the desired dimensions with aspect-ratio.`;
+        Technical Requirements:
+        - High resolution, professional quality
+        - Detailed and smooth design suitable as a backdrop
+        - Balanced visual hierarchy that doesn't compete with text overlay
+        - Professional lighting and color grading
+        - No watermarks, signatures, or distracting elements
+        - Aspect ratio: ${userInput.orientation === 'portrait' ? '3:4 (portrait)' : '4:3 (landscape)'}
+        - Exclude from image: ${userInput.exclusions.join('. ')}
+
+        Overlay Text: "${userInput.posterQuote}"
+        - Typography must be highly legible and complement the art style
+        - Text placement should follow the composition principles specified
+        - Ensure strong contrast between text and background for maximum readability
+
+        Generate a complete, ready-to-use poster image with the background and overlay text harmoniously integrated.`;
+
         let prompt = basePrompt
 
         if (lastGeneration) {

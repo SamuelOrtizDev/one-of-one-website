@@ -41,7 +41,7 @@ export function AiMainFlow() {
 
     const [currentPhase, setCurrentPhase] = useState(PHASES.INTERESTS)
     const [userChoice, setUserChoice] = useState({
-        interests: null,
+        interests: [],
         hurdles: null,
         posterPurpose: null,
         quoteFeel: null,
@@ -94,7 +94,7 @@ export function AiMainFlow() {
     const isStepValid = useMemo(() => {
         switch (currentPhase) {
             case PHASES.INTERESTS:
-                return userChoice.interests !== null
+                return userChoice.interests.length !== 0
             case PHASES.HURDLES:
                 return userChoice.hurdles !== null
             case PHASES.PURPOSE:

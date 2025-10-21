@@ -11,13 +11,17 @@ export function AiImageStep({ setUserChoice, userChoice }) {
     const [lastGeneration, setLastGeneration] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { artStyle, colorPalette, feeling, exclusions, posterQuote } = userChoice
+    const { interests, artStyle, colorPalette, feeling, exclusions, posterQuote, hurdles, posterPurpose, quoteFeel } = userChoice
     const promptObject = {
         artStyle,
         colorPalette,
         feeling,
         exclusions,
-        posterQuote
+        posterQuote,
+        interests,
+        hurdles,
+        posterPurpose,
+        quoteFeel
     }
 
     useEffect(() => {
@@ -122,11 +126,16 @@ export function AiImageStep({ setUserChoice, userChoice }) {
                     </ul>
             }
 
-            <p>You can still iterate from you results!! use this chat to let the AI what you want</p>
-            <form onSubmit={handleRefine} className={`pb-8 md:pb-0 gap-2 md:gap-4 md:mt-4 flex md:items-end flex-col md:flex-row transition-all ${isLoading ? "opacity-0" : "opacity-100"}`}>
-                <textarea disabled={isLoading} name="refineImagesTextArea" placeholder="Make them shorter..." className="resize-none bg-[#F8F8F8] rounded-lg p-4 outline-none border border-[#F8F8F8] focus:border-[#C9C9C9] w-full max-w-xl" />
-                <button disabled={isLoading} className="px-4 py-2 rounded-md bg-oOrange-200 text-white font-bold w-fit h-fit cursor-pointer">Refine images</button>
-            </form>
+            {
+                image &&
+                <>
+                    <p>You can still iterate from you results!! use this chat to let the AI what you want</p>
+                    <form onSubmit={handleRefine} className={`pb-8 md:pb-0 gap-2 md:gap-4 md:mt-4 flex md:items-end flex-col md:flex-row transition-all ${isLoading ? "opacity-0" : "opacity-100"}`}>
+                        <textarea disabled={isLoading} name="refineImagesTextArea" placeholder="Make them shorter..." className="resize-none bg-[#F8F8F8] rounded-lg p-4 outline-none border border-[#F8F8F8] focus:border-[#C9C9C9] w-full max-w-xl" />
+                        <button disabled={isLoading} className="px-4 py-2 rounded-md bg-oOrange-200 text-white font-bold w-fit h-fit cursor-pointer">Refine image</button>
+                    </form>
+                </>
+            }
         </motion.div>
     )
 }
