@@ -1,7 +1,7 @@
 'use client'
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { ArrowRight, X } from "../common/Icons";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import sign from "./assets/sign.svg"
 import Image from "next/image";
 import Link from "next/link";
@@ -42,6 +42,7 @@ export function AiMainFlow() {
     const [currentPhase, setCurrentPhase] = useState(PHASES.INTERESTS)
     const [userChoice, setUserChoice] = useState({
         interests: [],
+        customInterest: "",
         hurdles: null,
         posterPurpose: null,
         quoteFeel: null,
@@ -94,7 +95,7 @@ export function AiMainFlow() {
     const isStepValid = useMemo(() => {
         switch (currentPhase) {
             case PHASES.INTERESTS:
-                return userChoice.interests.length !== 0
+                return userChoice.interests.length !== 0 || userChoice.customInterest.trim() !== ""
             case PHASES.HURDLES:
                 return userChoice.hurdles !== null
             case PHASES.PURPOSE:

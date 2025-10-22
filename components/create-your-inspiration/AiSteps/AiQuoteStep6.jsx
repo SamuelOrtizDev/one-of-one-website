@@ -8,9 +8,10 @@ export function AiQuoteStep6({ setUserChoice, userChoice }) {
     const [lastGeneration, setLastGeneration] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { interests, hurdles, posterPurpose, quoteFeel, textType } = userChoice
+    const { interests, customInterest, hurdles, posterPurpose, quoteFeel, textType } = userChoice
+    const allInterests = [...interests, customInterest].filter(Boolean);
     const promptObject = {
-        interests,
+        allInterests,
         hurdles,
         posterPurpose,
         quoteFeel,

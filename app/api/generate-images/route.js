@@ -12,7 +12,7 @@ export async function POST(request) {
         Overall Feeling: ${userInput.feeling}
 
         User Context:
-        - Interests: ${userInput.interests.join('. ')}
+        - Interests: ${userInput.allInterests.join('. ')}
         - Hurdles/Challenges: ${userInput.hurdles}
         - Poster Purpose: ${userInput.posterPurpose}
         - Quote Tone: ${userInput.quoteFeel}

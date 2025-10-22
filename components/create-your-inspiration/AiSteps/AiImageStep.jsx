@@ -11,14 +11,15 @@ export function AiImageStep({ setUserChoice, userChoice }) {
     const [lastGeneration, setLastGeneration] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { interests, artStyle, colorPalette, feeling, exclusions, posterQuote, hurdles, posterPurpose, quoteFeel } = userChoice
+    const { interests, customInterest, artStyle, colorPalette, feeling, exclusions, posterQuote, hurdles, posterPurpose, quoteFeel } = userChoice
+    const allInterests = [...interests, customInterest].filter(Boolean);
     const promptObject = {
         artStyle,
         colorPalette,
         feeling,
         exclusions,
         posterQuote,
-        interests,
+        allInterests,
         hurdles,
         posterPurpose,
         quoteFeel

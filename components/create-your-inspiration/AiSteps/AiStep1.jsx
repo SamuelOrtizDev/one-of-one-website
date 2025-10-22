@@ -1,8 +1,11 @@
 'use client'
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import interests from "@/const/interests";
+import { useState } from "react";
 
 export function AiStep1({ setUserChoice, userChoice }) {
+
+    const [isAddingInterest, setIsAddingInterest] = useState(false)
 
     const selectInterests = (value) => {
         setUserChoice(prev => {
@@ -18,6 +21,25 @@ export function AiStep1({ setUserChoice, userChoice }) {
             };
         });
     };
+
+    const handleClickCustomInterest = () => {
+        if (isAddingInterest) {
+            setIsAddingInterest(false)
+            setUserChoice(prev => ({
+                ...prev,
+                customInterest: ""
+            }))
+        } else {
+            setIsAddingInterest(true)
+        }
+    }
+
+    const handleCustomInterest = (e) => {
+        setUserChoice(prev => ({
+            ...prev,
+            customInterest: e.target.value
+        }))
+    }
 
     return (
         <motion.div initial={{ top: 100, opacity: 0 }}
@@ -41,7 +63,25 @@ export function AiStep1({ setUserChoice, userChoice }) {
                         )
                     })
                 }
+                <li>
+                    <button onClick={handleClickCustomInterest} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${isAddingInterest ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                        Other...
+                    </button>
+                </li>
             </ul>
+
+            <AnimatePresence>
+                {
+                    isAddingInterest &&
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        className="pb-8 md:pb-0 gap-6 md:gap-16 md:mt-4">
+                        <textarea value={userChoice.customInterest} onChange={handleCustomInterest} name="custom_interest" placeholder="Type your interests" className="resize-none bg-[#F8F8F8] rounded-lg p-4 outline-none border border-[#F8F8F8] focus:border-[#C9C9C9] w-full max-w-xl min-h-[100px]" />
+                    </motion.div>
+                }
+            </AnimatePresence>
         </motion.div>
     )
 }
