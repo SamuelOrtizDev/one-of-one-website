@@ -16,7 +16,7 @@ export default function SizeSelect({ setUserChoice, userChoice }) {
 
     const getSizeOptions = (orientation) => {
         return baseSizes.map(size => {
-            if (orientation === 'landscape') {
+            if (orientation === '4:3') {
                 return formatSize(size.height, size.width);
             } else {
                 return formatSize(size.width, size.height);

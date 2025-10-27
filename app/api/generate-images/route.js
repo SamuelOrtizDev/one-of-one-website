@@ -23,11 +23,12 @@ export async function POST(request) {
         - Balanced visual hierarchy that doesn't compete with text overlay
         - Professional lighting and color grading
         - No watermarks, signatures, or distracting elements
-        - Aspect ratio: ${userInput.orientation === 'portrait' ? '3:4 (portrait)' : '4:3 (landscape)'}
         - Exclude from image: ${userInput.exclusions.join('. ')}
+        - The generated MUST have sense with the selected overlay text
+        - **THE FINAL IMAGE MUST STRICTLY ADHERE TO A ${userInput.orientation} ASPECT RATIO.**
 
         Overlay Text: "${userInput.posterQuote}"
-        - Typography must be highly legible and complement the art style
+        - Typography MUST be highly legible and complement the art style
         - Text placement should follow the composition principles specified
         - Ensure strong contrast between text and background for maximum readability
 
@@ -50,11 +51,11 @@ export async function POST(request) {
                 google: {
                     responseModalities: ['IMAGE'],
                     imageConfig: {
-                        aspectRatio: userInput.orientation === 'portrait' ? "3:4" : "4:3"
+                        aspectRatio: userInput.orientation
                     }
                 }
             }
-        })
+        });
         return NextResponse.json({ image: files[0] || null, prompt })
 
     } catch (error) {
