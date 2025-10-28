@@ -37,7 +37,7 @@ export function HowItWorks() {
                 <p className="font-light">From Idea to Masterpiece</p>
             </span>
 
-            <ul className="flex justify-center md:justify-between items-center flex-wrap gap-12 text-wrap">
+            <ul className="flex justify-center md:justify-between flex-wrap gap-12 text-wrap">
                 {
                     features.map(({icon, title, desc}) => (
                         <li key={title} className="flex flex-col items-center gap-6 max-w-[260px]">
