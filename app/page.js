@@ -1,6 +1,9 @@
 import { CTASection } from "@/components/Home/CTASection/CTASection";
 import { Faq } from "@/components/Home/FAQ/Faq";
 import { Hero } from "@/components/Home/Hero/Hero";
+import { HowItWorks } from "@/components/Home/HowItWorks/Main";
+import { InspirationForEveryDay } from "@/components/Home/InspirationForEveryDay/Main";
+import { ReadyToCreate } from "@/components/Home/ReadyToCreate/Main";
 import { StepsCTA } from "@/components/Home/StepsCTA/StepsCTA";
 import { Testimonials } from "@/components/Home/Testimonials/Testimonials";
 
@@ -40,10 +43,13 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Testimonials />
+      <InspirationForEveryDay/>
+      <HowItWorks/>
+      <ReadyToCreate/>
+      {/* <Testimonials />
       <StepsCTA />
       <CTASection />
-      <Faq />
+      <Faq /> */}
     </>
   );
 }

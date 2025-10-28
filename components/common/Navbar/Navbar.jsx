@@ -5,45 +5,64 @@ import Image from "next/image"
 import { useState } from "react"
 import { MenuIcon, X } from "../Icons"
 import { usePathname } from "next/navigation"
+import { SecondaryCTA } from "../Buttons"
 
 export default function Navbar() {
-
-    const linkStates = 'transition-colors hover:text-blue-200 hover:font-medium cursor-pointer'
 
     const [isOpen, setIsOpen] = useState(false)
     const path = usePathname()
 
-    if (path != "/create-your-inspiration") return (
-        <header className="w-full fixed top-0 px-7 md:px-[72px] py-4 md:py-6 bg-white shadow-sm z-40 text-[#072E3F]">
-            <div className="mx-auto max-w-[1800px] flex items-center justify-between flex-wrap gap-8">
-                <Link href="/" className="hover:scale-105 transition-all flex items-center flex-col">
-                    <Image src={logo} alt="OneOfOne Logo" className="max-w-[80px] md:max-w-[110px]" />
-                    <small className="font-bold">Custom Posters</small>
-                </Link>
+    if (path === '/create-your-inspiration') return
 
-                <nav className="hidden md:flex items-center gap-8 text-blue-100">
-                    {/* <Link className={linkStates} href="/">Gift a Memory</Link> */}
-                    {/* <Link className={linkStates} href="/">About Us</Link> */}
-                    <Link href="/create-your-inspiration" className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 py-2 px-6 bg-gradient-to-r from-oOrange-100 to-oOrange-200 text-white">Create Your inspiration</Link>
+    return (
+        <header className="w-full fixed top-0 px-7 md:px-[72px] py-4 md:py-6 bg-black/60 backdrop-blur-sm z-40 text-white">
+            <div className="mx-auto max-w-[1400px] flex items-center justify-between flex-wrap">
+                <span className="w-full max-w-xs">
+                    <Link href="/" className="hover:scale-105 transition-all">
+                        <Image src={logo} alt="OneOfOne Logo" className="max-w-[50px] md:max-w-[90px]" />
+                    </Link>
+                </span>
+
+                <nav className="hidden nav:flex items-center gap-8">
+                    <NavLinks />
                 </nav>
 
-                <nav className="md:hidden">
+                <nav className="hidden nav:flex gap-8 w-full justify-end max-w-xs">
+                    <SecondaryCTA />
+                </nav>
+
+                <nav className="nav:hidden">
                     <button className="text-blue-200" onClick={() => setIsOpen(!isOpen)}>
                         {
-                            isOpen ? <X/> : <MenuIcon/>
+                            isOpen ? <X /> : <MenuIcon />
                         }
                     </button>
                 </nav>
 
                 {
                     isOpen &&
-                    <div className="flex flex-col items-center gap-4 basis-full mb-8 text-blue-100">
-                        {/* <Link className={linkStates} href="/">Gift a Memory</Link> */}
-                        {/* <Link className={linkStates} href="/">About Us</Link> */}
-                        <Link href="/create-your-inspiration" className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 py-2 px-6 bg-gradient-to-r from-oOrange-100 to-oOrange-200 text-white">Create Your inspiration</Link>
+                    <div className="flex flex-col items-center gap-8 basis-full mb-8">
+                        <NavLinks />
+                        <SecondaryCTA />
                     </div>
                 }
             </div>
         </header>
+    )
+}
+
+function NavLinks() {
+
+    const linkStates = 'hover-navlink transition-colors hover:text-blue-100 cursor-pointer'
+    const activeStates = 'active-navlink font-semibold'
+    const path = usePathname()
+
+    return (
+        <>
+            <Link className={path === "/" ? activeStates : linkStates} href="/">Home</Link>
+            <Link className={path === "/about" ? activeStates : linkStates} href="/about">About Us</Link>
+            <Link className={path === "/how-it-works" ? activeStates : linkStates} href="/how-it-works">How it Works</Link>
+            <Link className={path === "/contact" ? activeStates : linkStates} href="/contact">Contact</Link>
+        </>
     )
 }
