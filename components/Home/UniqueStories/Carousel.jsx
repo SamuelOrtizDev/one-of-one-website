@@ -1,4 +1,6 @@
 'use client'
+import { motion } from "framer-motion";
+import { fadeInUp } from "@/const/animation";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules'
 import 'swiper/css';
@@ -35,7 +37,7 @@ const quotes = [
 
 export function Carousel() {
     return (
-        <div className="mt-12 md:mt-16 mx-auto">
+        <motion.div {...fadeInUp} className="mt-12 md:mt-16 mx-auto">
             <Swiper
                 modules={[Autoplay]}
                 autoplay={{
@@ -68,7 +70,7 @@ export function Carousel() {
                     ))
                 }
             </Swiper>
-        </div>
+        </motion.div>
     )
 }
 

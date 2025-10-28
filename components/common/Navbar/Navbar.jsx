@@ -28,7 +28,7 @@ export default function Navbar() {
             duration: .2,
             ease: "easeInOut"
         }}
-        className={`w-full fixed top-0 px-7 md:px-[72px] py-3 md:py-6 transition-transform bg-black/60 backdrop-blur-sm z-40 text-white`}>
+        className={`w-full fixed top-0 px-7 md:px-[72px] py-3 md:py-6 transition-transform bg-black/60 backdrop-blur-sm z-40 text-white border-b border-gold-100`}>
             <div className="mx-auto max-w-[1400px] flex items-center justify-between flex-wrap">
                 <span className="md:w-full max-w-xs">
                     <Link href="/">
@@ -66,7 +66,7 @@ export default function Navbar() {
 
 function NavLinks() {
 
-    const linkStates = 'hover-navlink transition-colors hover:text-blue-100 cursor-pointer'
+    const linkStates = 'hover-navlink transition-colors hover:text-oBlue-100 cursor-pointer'
     const activeStates = 'active-navlink font-semibold'
     const path = usePathname()
 
