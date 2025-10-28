@@ -49,9 +49,9 @@ export function AiImageStep({ setUserChoice, userChoice }) {
 
             const data = await res.json();
 
-            if (data.image?.base64) {
+            if (data.image?.base64Data) {
                 const imageFile = base64ToFile(
-                    data.image.base64,
+                    data.image.base64Data,
                     'generated-image.png',
                     data.image.mediaType || 'image/png'
                 );
@@ -117,7 +117,7 @@ export function AiImageStep({ setUserChoice, userChoice }) {
                     <ul className="flex items-end gap-3 md:gap-6 pt-4 pb-6 flex-wrap">
                         <li>
                             <Image
-                                base64={image.base64}
+                                base64={image.base64Data}
                                 mediaType={image.mediaType}
                                 uint8Array={new Uint8Array()}
                                 alt="generated AI Image"
