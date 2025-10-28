@@ -6,6 +6,7 @@ import { useState } from "react"
 import { MenuIcon, X } from "../Icons"
 import { usePathname } from "next/navigation"
 import { SecondaryCTA } from "../Buttons"
+import { motion } from "framer-motion"
 
 export default function Navbar() {
 
@@ -15,11 +16,23 @@ export default function Navbar() {
     if (path === '/create-your-inspiration') return
 
     return (
-        <header className="w-full fixed top-0 px-7 md:px-[72px] py-4 md:py-6 bg-black/60 backdrop-blur-sm z-40 text-white">
+        <motion.header
+        initial={{
+            y: -200
+        }}
+        animate={{
+            y: 0,
+            height: isOpen ? '100dvh' : 'fit-content',
+        }}
+        transition={{
+            duration: .2,
+            ease: "easeInOut"
+        }}
+        className={`w-full fixed top-0 px-7 md:px-[72px] py-3 md:py-6 transition-transform bg-black/60 backdrop-blur-sm z-40 text-white`}>
             <div className="mx-auto max-w-[1400px] flex items-center justify-between flex-wrap">
-                <span className="w-full max-w-xs">
-                    <Link href="/" className="hover:scale-105 transition-all">
-                        <Image src={logo} alt="OneOfOne Logo" className="max-w-[50px] md:max-w-[90px]" />
+                <span className="md:w-full max-w-xs">
+                    <Link href="/">
+                        <Image src={logo} alt="OneOfOne Logo" className="max-w-[60px] md:max-w-[90px] hover:scale-105 transition-transform" />
                     </Link>
                 </span>
 
@@ -32,7 +45,7 @@ export default function Navbar() {
                 </nav>
 
                 <nav className="nav:hidden">
-                    <button className="text-blue-200" onClick={() => setIsOpen(!isOpen)}>
+                    <button onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
                         {
                             isOpen ? <X /> : <MenuIcon />
                         }
@@ -41,13 +54,13 @@ export default function Navbar() {
 
                 {
                     isOpen &&
-                    <div className="flex flex-col items-center gap-8 basis-full mb-8">
+                    <div className="flex flex-col items-center gap-8 basis-full my-8">
                         <NavLinks />
                         <SecondaryCTA />
                     </div>
                 }
             </div>
-        </header>
+        </motion.header>
     )
 }
 

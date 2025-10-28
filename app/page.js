@@ -1,11 +1,10 @@
-import { CTASection } from "@/components/Home/CTASection/CTASection";
-import { Faq } from "@/components/Home/FAQ/Faq";
+import { Faq } from "@/components/Home/Faq/Main";
+import { Finishes } from "@/components/Home/Finishes/Main";
 import { Hero } from "@/components/Home/Hero/Hero";
 import { HowItWorks } from "@/components/Home/HowItWorks/Main";
 import { InspirationForEveryDay } from "@/components/Home/InspirationForEveryDay/Main";
 import { ReadyToCreate } from "@/components/Home/ReadyToCreate/Main";
-import { StepsCTA } from "@/components/Home/StepsCTA/StepsCTA";
-import { Testimonials } from "@/components/Home/Testimonials/Testimonials";
+import { UniqueStories } from "@/components/Home/UniqueStories/Main";
 
 export const metadata = {
   title: "OneOfOne Posters - Create Your Inspiration | Where Words Meet Timeless Imagery",
@@ -45,7 +44,10 @@ export default function Home() {
       <Hero />
       <InspirationForEveryDay/>
       <HowItWorks/>
+      <UniqueStories/>
       <ReadyToCreate/>
+      <Finishes/>
+      <Faq/>
       {/* <Testimonials />
       <StepsCTA />
       <CTASection />
