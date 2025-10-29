@@ -1,10 +1,5 @@
-import { Faq } from "@/components/Home/Faq/Main";
-import { Finishes } from "@/components/Home/Finishes/Main";
+import dynamic from "next/dynamic";
 import { Hero } from "@/components/Home/Hero/Hero";
-import { HowItWorks } from "@/components/Home/HowItWorks/Main";
-import { InspirationForEveryDay } from "@/components/Home/InspirationForEveryDay/Main";
-import { ReadyToCreate } from "@/components/Home/ReadyToCreate/Main";
-import { UniqueStories } from "@/components/Home/UniqueStories/Main";
 
 export const metadata = {
   title: "OneOfOne Posters - Create Your Inspiration | Where Words Meet Timeless Imagery",
@@ -38,20 +33,45 @@ export const metadata = {
   },
 };
 
+const InspirationForEveryDay = dynamic(() =>
+  import("@/components/Home/InspirationForEveryDay/Main").then(mod => ({ default: mod.InspirationForEveryDay }))
+);
+
+const HowItWorks = dynamic(() =>
+  import("@/components/Home/HowItWorks/Main").then(mod => ({ default: mod.HowItWorks }))
+);
+
+const UniqueStories = dynamic(() =>
+  import("@/components/Home/UniqueStories/Main").then(mod => ({ default: mod.UniqueStories }))
+);
+
+const ReadyToCreate = dynamic(() =>
+  import("@/components/Home/ReadyToCreate/Main").then(mod => ({ default: mod.ReadyToCreate }))
+);
+
+const Finishes = dynamic(() =>
+  import("@/components/Home/Finishes/Main").then(mod => ({ default: mod.Finishes }))
+);
+
+const Faq = dynamic(() =>
+  import("@/components/Home/Faq/Main").then(mod => ({ default: mod.Faq }))
+);
+
+const GetStarted = dynamic(() =>
+  import("@/components/Home/GetStarted/Main").then(mod => ({ default: mod.GetStarted }))
+);
+
 export default function Home() {
   return (
     <>
       <Hero />
-      <InspirationForEveryDay/>
-      <HowItWorks/>
-      <UniqueStories/>
-      <ReadyToCreate/>
-      <Finishes/>
-      <Faq/>
-      {/* <Testimonials />
-      <StepsCTA />
-      <CTASection />
-      <Faq /> */}
+      <InspirationForEveryDay />
+      <HowItWorks />
+      <UniqueStories />
+      <ReadyToCreate />
+      <Finishes />
+      <Faq />
+      <GetStarted/>
     </>
   );
 }
