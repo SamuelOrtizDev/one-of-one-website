@@ -3,13 +3,10 @@
 @import "tw-animate-css";
 
 @theme {
-  --color-blue-100: #6DB3D1;
-  --color-blue-200: #0F6083;
-  --color-oOrange-100: #FFA642;
-  --color-oOrange-200: #FF7017;
-
   /* new colors */
   --color-carbon: #282828;
+  --color-obsidian-100: #002B3D;
+  --color-obsidian-200: #01151D;
   --color-gold-100: #FFDD9A;
   --color-gold-200: #F4C358;
   --color-oBlue-100: #39B8EB;

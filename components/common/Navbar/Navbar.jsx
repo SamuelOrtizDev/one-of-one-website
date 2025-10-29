@@ -7,6 +7,7 @@ import { MenuIcon, X } from "../Icons"
 import { usePathname } from "next/navigation"
 import { SecondaryCTA } from "../Buttons"
 import { motion } from "framer-motion"
+import navLinks from "@/const/navLinks"
 
 export default function Navbar() {
 
@@ -17,18 +18,18 @@ export default function Navbar() {
 
     return (
         <motion.header
-        initial={{
-            y: -200
-        }}
-        animate={{
-            y: 0,
-            height: isOpen ? '100dvh' : 'fit-content',
-        }}
-        transition={{
-            duration: .2,
-            ease: "easeInOut"
-        }}
-        className={`w-full fixed top-0 transition-transform bg-black/60 backdrop-blur-sm z-40 text-white border-b border-gold-100`}>
+            initial={{
+                y: -200
+            }}
+            animate={{
+                y: 0,
+                height: isOpen ? '100dvh' : 'fit-content',
+            }}
+            transition={{
+                duration: .2,
+                ease: "easeInOut"
+            }}
+            className={`w-full fixed top-0 transition-transform bg-black/60 backdrop-blur-sm z-40 text-white border-b border-gold-100`}>
             <div className="mx-auto max-w-[1400px] flex items-center justify-between flex-wrap px-7 md:px-[72px] py-3 md:py-6">
                 <span className="md:w-full max-w-xs">
                     <Link href="/">
@@ -72,10 +73,11 @@ export function NavLinks() {
 
     return (
         <>
-            <Link className={path === "/" ? activeStates : linkStates} href="/">Home</Link>
-            <Link className={path === "/about" ? activeStates : linkStates} href="/about">About Us</Link>
-            <Link className={path === "/how-it-works" ? activeStates : linkStates} href="/how-it-works">How it Works</Link>
-            <Link className={path === "/contact" ? activeStates : linkStates} href="/contact">Contact</Link>
+            {
+                navLinks.map(({ label, href }) => (
+                    <Link key={label} href={href} className={path === href ? activeStates : linkStates}>{label}</Link>
+                ))
+            }
         </>
     )
 }

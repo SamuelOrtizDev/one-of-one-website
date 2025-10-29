@@ -61,6 +61,10 @@ const GetStarted = dynamic(() =>
   import("@/components/Home/GetStarted/Main").then(mod => ({ default: mod.GetStarted }))
 );
 
+const StillHaveQuestions = dynamic(() =>
+  import("@/components/Home/StillHaveQuestions/Main").then(mod => ({ default: mod.StillHaveQuestions }))
+);
+
 export default function Home() {
   return (
     <>
@@ -71,6 +75,7 @@ export default function Home() {
       <ReadyToCreate />
       <Finishes />
       <Faq />
+      <StillHaveQuestions/>
       <GetStarted/>
     </>
   );
