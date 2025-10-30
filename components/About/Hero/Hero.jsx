@@ -8,7 +8,7 @@ import annaHero from "./assets/annaHero.webp"
 export function Hero() {
     return (
         <SectionLayout
-            noPadding containerClasses={"bg-obsidian-50"} className='grid grid-cols-1 md:grid-cols-2 gap-12 pb-16 pt-28 md:pt-52 md:pb-32 text-white'
+            noPadding containerClasses={"bg-obsidian-50"} className='grid grid-cols-1 md:grid-cols-2 gap-12 pb-16 pt-28 md:pt-44 md:pb-32 text-white'
         >
             <div className="flex flex-col justify-center gap-16">
                 <motion.h1 initial={{ opacity: 0, y: 30 }}
