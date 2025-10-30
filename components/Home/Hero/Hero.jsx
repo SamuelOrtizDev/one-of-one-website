@@ -26,7 +26,7 @@ export function Hero() {
     useEffect(() => {
         const interval = setInterval(() => {
             setColorIndex((prev) => (prev + 1) % colors.length);
-        }, 5500);
+        }, 5200);
 
         return () => clearInterval(interval);
     }, []);
