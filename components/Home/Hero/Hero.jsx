@@ -54,7 +54,7 @@ export function Hero() {
                             <Image
                                 src={background}
                                 alt={`Background ${index + 1}`}
-                                className='w-screen h-[400px] md:h-[616px] object-cover'
+                                className='w-screen h-screen object-cover'
                             />
                         </SwiperSlide>
                     ))}
@@ -64,7 +64,7 @@ export function Hero() {
 
             <SectionLayout
                 containerClasses={"z-10 relative"}
-                noPadding className='flex flex-col items-center text-center gap-6 justify-center pb-16 pt-28 md:pt-52 md:pb-32 text-white'>
+                noPadding className='flex flex-col items-center text-center h-screen gap-6 justify-center pb-16 pt-28 md:pt-52 md:pb-32 text-white'>
                 <motion.h1
                     className="text-3xl md:text-6xl"
                     initial={{ opacity: 0, y: 30 }}

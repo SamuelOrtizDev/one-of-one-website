@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { fadeInUp } from "@/const/animation";
 import SectionLayout from "@/components/common/SectionLayout";
 import Image from "next/image";
-import ladyImage from "./assets/ladyImage.webp"
+import ladyImage from "./assets/lady.webp"
 
 export function YouAreOneOfOne() {
     return (

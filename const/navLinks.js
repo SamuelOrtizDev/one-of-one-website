@@ -8,10 +8,6 @@ export default [
         href: "/about"
     },
     {
-        label: "How it Works",
-        href: "/how-it-works"
-    },
-    {
         label: "Contact",
         href: "/contact"
     },
