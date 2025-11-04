@@ -69,17 +69,18 @@ export function Hero() {
                 containerClasses={"z-10 relative"}
                 noPadding className='flex flex-col items-center text-center h-screen gap-6 justify-center pb-16 pt-28 md:pt-52 md:pb-32 text-white'>
                 <motion.h1
-                    className="text-3xl md:text-6xl"
+                    className="text-5xl md:text-6xl"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
                     Craft Your OneOfOne <br />
                     <span
-                        className="font-bold inline-block overflow-hidden h-[38px] md:h-[76px] align-bottom"
+                        className="font-bold inline-block overflow-hidden h-[48px] md:h-[76px] align-bottom"
                     >
                         <Swiper
                             direction="vertical"
+                            spaceBetween={12}
                             loop={true}
                             autoplay={{
                                 delay: 5000,
@@ -93,7 +94,7 @@ export function Hero() {
                         >
                             {
                                 words.map((word, index) => (
-                                    <SwiperSlide key={index} className='flex items-center justify-center h-full]'>
+                                    <SwiperSlide key={index} className='flex items-center justify-center h-full text-center'>
                                         <span style={{color: word.color}}>{word.label}</span>
                                     </SwiperSlide>
                                 ))
