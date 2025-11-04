@@ -19,17 +19,20 @@ const backgroundVariants = [
 
 export function Hero() {
 
-    const colors = ['#FFFFFF', '#FFDD9A', '#39B8EB'];
-
-    const [colorIndex, setColorIndex] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setColorIndex((prev) => (prev + 1) % colors.length);
-        }, 5200);
-
-        return () => clearInterval(interval);
-    }, []);
+    const words = [
+        {
+            label: "Poster.",
+            color: "#FFFFFF"
+        },
+        {
+            label: "Story.",
+            color: "#FFDD9A"
+        },
+        {
+            label: "Inspiration.",
+            color: "#39B8EB"
+        },
+    ];
 
     return (
         <>
@@ -72,13 +75,31 @@ export function Hero() {
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
                     Craft Your OneOfOne <br />
-                    <motion.span
-                        animate={{ color: colors[colorIndex] }}
-                        transition={{ duration: .7 }}
-                        className="font-bold"
+                    <span
+                        className="font-bold inline-block overflow-hidden h-[38px] md:h-[76px] align-bottom"
                     >
-                        Poster.
-                    </motion.span>
+                        <Swiper
+                            direction="vertical"
+                            loop={true}
+                            autoplay={{
+                                delay: 5000,
+                                disableOnInteraction: false
+                            }}
+                            speed={800}
+                            slidesPerView={1}
+                            allowTouchMove={false}
+                            modules={[Autoplay]}
+                            className="h-full"
+                        >
+                            {
+                                words.map((word, index) => (
+                                    <SwiperSlide key={index} className='flex items-center justify-center h-full]'>
+                                        <span style={{color: word.color}}>{word.label}</span>
+                                    </SwiperSlide>
+                                ))
+                            }
+                        </Swiper>
+                    </span>
                 </motion.h1>
 
                 <motion.p
