@@ -10,14 +10,14 @@ import Image from "next/image";
 export function InspirationForEveryDay() {
     return (
         <SectionLayout>
-            <span className="flex flex-col gap-4 md:gap-6">
-                <motion.h2 {...fadeInUp} className="text-3xl md:text-5xl">Inpiration for <span className="px-2 py-2 text-white font-bold bg-oBlue-200">Every Day</span></motion.h2>
+            <span className="flex flex-col gap-4 md:gap-6 text-center md:text-left">
+                <motion.h2 {...fadeInUp} className="text-2xl md:text-5xl">Inpiration for <span className="px-2 py-2 text-white font-bold bg-oBlue-200">Every Day</span></motion.h2>
                 <motion.p {...fadeInUp}>Because blank walls can’t remind you who you are — but your story can.</motion.p>
             </span>
 
             <article className="grid gap-6 grid-cols-1 md:grid-cols-2 mt-12 md:mt-20">
                 <div className="bg-repeat bg-center p-6" style={{ backgroundImage: `url(${backgroundTexture.src})` }}>
-                    <div className="bg-oCard p-4 flex flex-col gap-6 h-full text-xl font-light text-wrap">
+                    <div className="bg-oCard p-4 flex flex-col gap-6 h-full text-xl font-light text-wrap text-center md:text-left">
                         <motion.p {...fadeInUp}>You have big, long-term goals, but what about the motivation to get you through another day of 'getting there'?</motion.p>
                         <motion.p {...fadeInUp}>Willpower fades throughout the day. You just need a little push — a reminder of what you're striving for… and blank walls don't help.</motion.p>
                         <motion.p {...fadeInUp}>We start with what you know about yourself, so you don't waste hours looking through generic posters online.</motion.p>

@@ -11,7 +11,7 @@ export function TheSpark() {
         <SectionLayout>
             <motion.h2 {...fadeInUp} className="text-3xl md:text-5xl">The <span className="px-2 py-2 text-white font-bold bg-oBlue-100">Spark</span></motion.h2>
 
-            <article className="grid gap-6 grid-cols-1 md:grid-cols-2 place-items-center mt-12 md:mt-16">
+            <article className="grid gap-6 grid-cols-1 md:grid-cols-2 place-items-center mt-12 md:mt-16 text-center md:text-left">
                 <div className="bg-repeat bg-center p-6" style={{ backgroundImage: `url(${backgroundTexture.src})` }}>
                     <div className="bg-oCard px-4 py-8">
                         <motion.p {...fadeInUp}>It began with a single idea that couldn't be found. <strong className="font-medium text-xl text-gold-300">David</strong> searched the entire Internet for a poster featuring his favorite Michael Jordan quote, but it didn’t exist, not for any price. So, he crafted it himself, pouring weeks into designing a piece that spoke to his soul. Noticing the thought that went into materializing his inspiration, <strong className="font-medium text-xl text-gold-300">David</strong> then gifted similar one-of-a-kind posters to his friends and family. He quickly saw that, because these posters were so individual, they weren’t just admired, they were cherished. <strong className="font-medium text-xl text-gold-300">That spark ignited OneOfOne.</strong></motion.p>
