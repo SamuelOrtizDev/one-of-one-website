@@ -102,7 +102,7 @@ export function AiImageStep({ setUserChoice, userChoice }) {
             animate={{ top: 0, opacity: 1 }}
             exit={{ top: 100, opacity: 0 }}
             transition={{ duration: 0.4 }} className="flex flex-col gap-4 text-[#072E3F] py-8">
-            <h3 className="font-bold text-2xl md:text-4xl">Let's give it <span className="text-blue-200">Shape</span></h3>
+            <h3 className="font-bold text-2xl md:text-4xl">Let's give it <span className="text-oBlue-200">Shape</span></h3>
             <p><strong>Step {getRealStep(11, userChoice)}.</strong> Choose an image with the help of AI!</p>
             <p>take a look at this AI generated images based on your preferences. Whenever you are ready, choose one and continue</p>
 

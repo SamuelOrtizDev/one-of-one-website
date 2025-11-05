@@ -112,17 +112,17 @@ export function FinalStep({ userChoice, previousStep }) {
 
             <article className="flex flex-col gap-6 md:gap-8">
                 <span className="flex flex-col gap-2">
-                    <h3 className="font-bold text-2xl md:text-4xl">Your Inspiration is <span className="text-blue-200">Created!</span></h3>
+                    <h3 className="font-bold text-2xl md:text-4xl">Your Inspiration is <span className="text-oBlue-200">Created!</span></h3>
                     <p className="text-wrap max-w-xl">If your quote is poorly visible against your background image, don't worry! Our graphic designer does a quality check on all ordered posters. You will receive the final poster preview within 24 hours</p>
                 </span>
 
                 <ul className="flex flex-col gap-2">
-                    <li><strong className="font-bold text-blue-200">Quote:</strong> {userChoice.posterQuote}</li>
-                    <li><strong className="font-bold text-blue-200">Orientation:</strong> {userChoice.orientation}</li>
-                    <li><strong className="font-bold text-blue-200">Material:</strong> {userChoice.material}</li>
-                    <li><strong className="font-bold text-blue-200">Size:</strong> {userChoice.size}</li>
-                    <li><strong className="font-bold text-blue-200">Frame:</strong> {userChoice.frame ? "Yes" : "No"}</li>
-                    {userChoice.frame && <li><strong className="font-bold text-blue-200">Frame Color:</strong> {userChoice.frameColor}</li>}
+                    <li><strong className="font-bold text-oBlue-200">Quote:</strong> {userChoice.posterQuote}</li>
+                    <li><strong className="font-bold text-oBlue-200">Orientation:</strong> {userChoice.orientation}</li>
+                    <li><strong className="font-bold text-oBlue-200">Material:</strong> {userChoice.material}</li>
+                    <li><strong className="font-bold text-oBlue-200">Size:</strong> {userChoice.size}</li>
+                    <li><strong className="font-bold text-oBlue-200">Frame:</strong> {userChoice.frame ? "Yes" : "No"}</li>
+                    {userChoice.frame && <li><strong className="font-bold text-oBlue-200">Frame Color:</strong> {userChoice.frameColor}</li>}
                 </ul>
 
                 <div className="flex items-center gap-3 mt-auto">

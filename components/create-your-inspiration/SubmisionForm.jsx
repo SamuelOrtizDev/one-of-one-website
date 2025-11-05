@@ -71,7 +71,7 @@ export function SubmissionForm({ userChoice, setIsFinalStep, setStep }) {
                 state.succeeded &&
                 <div className="text-center flex flex-col items-center gap-4">
                     <h3 className="font-bold text-2xl md:text-4xl mb-4">
-                        Your inspiration is <span className="text-blue-200">on its way!</span>
+                        Your inspiration is <span className="text-oBlue-200">on its way!</span>
                     </h3>
                     <p className="text-lg">
                         Perfect! Check your inbox within 24 hours for your personalized poster designs and checkout link.
@@ -86,7 +86,7 @@ export function SubmissionForm({ userChoice, setIsFinalStep, setStep }) {
                 (!state.submitting && !state.succeeded && !isLoading) &&
                 <>
                     <span className="flex flex-col gap-2">
-                        <h3 className="font-bold text-2xl md:text-4xl text-wrap">Your inspiration is <span className="text-blue-200">being crafted!</span></h3>
+                        <h3 className="font-bold text-2xl md:text-4xl text-wrap">Your inspiration is <span className="text-oBlue-200">being crafted!</span></h3>
                         <p className="text-wrap">We will send you an email where you can select your preferred poster design within 24 hours! Please provide your name and email to receive our confirmation and checkout email.</p>
                     </span>
                     <form onSubmit={handleCustomSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">

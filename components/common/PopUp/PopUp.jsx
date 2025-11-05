@@ -49,7 +49,7 @@ export function PopUp() {
                         <div className="bg-white p-8 rounded-2xl shadow-lg max-w-3xl w-full gap-6 mx-auto relative flex flex-col md:flex-row items-center justify-betweem">
                             <button
                                 onClick={handleClose}
-                                className="text-blue-200 hover:text-red-500 transition-colors cursor-pointer absolute right-2 top-2"
+                                className="text-oBlue-200 hover:text-red-500 transition-colors cursor-pointer absolute right-2 top-2"
                             >
                                 <X />
                             </button>

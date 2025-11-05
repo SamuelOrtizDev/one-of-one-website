@@ -29,7 +29,7 @@ export function AiStep9({ setUserChoice, userChoice }) {
             className="flex flex-col gap-4 text-[#072E3F] py-8"
         >
             <h3 className="font-bold text-2xl md:text-4xl">
-                Let's make <span className="text-blue-200">Sure</span>
+                Let's make <span className="text-oBlue-200">Sure</span>
             </h3>
             <p>
                 <strong>Step {getRealStep(9, userChoice)}.</strong> What should the background image AVOID? (Select all that apply)
@@ -42,8 +42,8 @@ export function AiStep9({ setUserChoice, userChoice }) {
                         <li key={value}>
                             <button
                                 onClick={() => selectExclusions(label)}
-                                className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${isSelected
-                                        ? "border-blue-200 font-bold"
+                                className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all ${isSelected
+                                        ? "border-oBlue-200 font-bold"
                                         : "cursor-pointer border-transparent"
                                     }`}
                             >

@@ -86,11 +86,11 @@ export function Hero() {
                                 delay: 5000,
                                 disableOnInteraction: false
                             }}
-                            speed={800}
+                            speed={1000}
                             slidesPerView={1}
                             allowTouchMove={false}
                             modules={[Autoplay]}
-                            className="h-full"
+                            className="h-full [&_.swiper-wrapper]:!transition-timing-[cubic-bezier(0.7,0,1,1)]"
                         >
                             {
                                 words.map((word, index) => (

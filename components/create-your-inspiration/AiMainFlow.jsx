@@ -156,7 +156,7 @@ export function AiMainFlow() {
 
     return (
         <div className={`transition-all md:bg-gradient-to-b ${isFinalStep ? "from-[#FFE9CA] to-[#FFA943]" : "from-white to-[#76B8D6]"} bg-cover bg-center`}>
-            <section className='min-h-screen text-blue-200 mx-auto max-w-[1600px] px-7 md:px-[72px] py-12 md:py-20'>
+            <section className='min-h-screen mx-auto max-w-[1600px] px-7 md:px-[72px] py-12 md:py-20'>
                 <div className={`rounded-2xl bg-white transition-all relative mt-12 ${isFinalStep ? "w-fit mx-auto md:px-12 py-2 md:py-8" : "w-full md:p-8"}`}>
                     {
                         !isFinalStep &&
@@ -226,7 +226,7 @@ export function AiMainFlow() {
                         <span className="flex items-center justify-between md:justify-start gap-2">
                             {
                                 (currentStepNumber !== 1) &&
-                                <button onClick={previousStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-blue-200 to-blue-100 group flex flex-row-reverse items-center gap-4 text-white h-fit">
+                                <button onClick={previousStep} className="px-6 py-3 font-medium rounded-lg text-white w-fit text-nowrap bg-oBlue-100 transition-all hover:saturate-200 group flex flex-row-reverse items-center gap-2 h-fit disabled:saturate-0 disabled:cursor-not-allowed cursor-pointer">
                                     Back
                                     <span className="group-hover:-translate-x-1 transition-transform rotate-180">
                                         <ArrowRight />
@@ -235,7 +235,7 @@ export function AiMainFlow() {
                             }
                             {
                                 (currentStepNumber !== totalSteps) &&
-                                <button disabled={!isStepValid} onClick={nextStep} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-oOrange-100 to-oOrange-200 group flex items-center gap-4 text-white h-fit disabled:saturate-0 disabled:cursor-not-allowed">
+                                <button disabled={!isStepValid} onClick={nextStep} className="px-6 py-3 group font-medium rounded-lg text-carbon w-fit text-nowrap bg-gradient-to-r from-gold-200 via-gold-100 to-gold-200 transition-all hover:brightness-110 hover:saturate-200 shadow-xl shadow-transparent hover:shadow-carbon/20 flex items-center gap-2 cursor-pointer disabled:saturate-0 disabled:cursor-not-allowed">
                                     Continue
                                     <span className="group-hover:translate-x-1 transition-transform">
                                         <ArrowRight />
@@ -244,7 +244,7 @@ export function AiMainFlow() {
                             }
                             {
                                 (currentStepNumber === totalSteps) &&
-                                <button disabled={!isStepValid} onClick={() => setIsFinalStep(true)} className="rounded-full font-bold transition-all ease-in-out duration-300 cursor-pointer hover:brightness-110 hover:saturate-200 md:px-8 px-4 py-2 bg-gradient-to-r from-oOrange-100 to-oOrange-200 group flex items-center gap-4 text-white h-fit disabled:saturate-0 disabled:cursor-not-allowed">
+                                <button disabled={!isStepValid} onClick={() => setCurrentPhase(PHASES.FINAL)} className="px-6 py-3 group font-medium rounded-lg text-carbon w-fit text-nowrap bg-gradient-to-r from-gold-200 via-gold-100 to-gold-200 transition-all hover:brightness-110 hover:saturate-200 shadow-xl shadow-transparent hover:shadow-carbon/20 flex items-center gap-4 cursor-pointer disabled:saturate-0">
                                     Continue to final
                                     <span className="group-hover:translate-x-1 transition-transform">
                                         <ArrowRight />

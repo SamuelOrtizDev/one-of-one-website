@@ -83,7 +83,7 @@ export function AiQuoteStep6({ setUserChoice, userChoice }) {
             animate={{ top: 0, opacity: 1 }}
             exit={{ top: 100, opacity: 0 }}
             transition={{ duration: 0.4 }} className="flex flex-col gap-4 text-[#072E3F] py-8">
-            <h3 className="font-bold text-2xl md:text-4xl">Let's give it <span className="text-blue-200">objective</span></h3>
+            <h3 className="font-bold text-2xl md:text-4xl">Let's give it <span className="text-oBlue-200">objective</span></h3>
             <p><strong>Step 6.</strong> Choose a quote</p>
             <p>take a look at this AI generated quotes based on your preferences. Whenever you are ready, choose one and continue</p>
 
@@ -99,7 +99,7 @@ export function AiQuoteStep6({ setUserChoice, userChoice }) {
                         {
                             quotes.map(quote => (
                                 <li key={quote}>
-                                    <button onClick={() => selectPosterQuote(quote)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all text-blue-200 ${userChoice.posterQuote === quote ? "border-blue-200 font-bold" : "cursor-pointer border-transparent"}`}>
+                                    <button onClick={() => selectPosterQuote(quote)} className={`px-4 md:px-6 py-3 rounded-md bg-[#F3F3F3] border transition-all ${userChoice.posterQuote === quote ? "border-oBlue-200 font-bold" : "cursor-pointer border-transparent"}`}>
                                         {quote}
                                     </button>
                                 </li>

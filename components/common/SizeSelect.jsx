@@ -51,7 +51,7 @@ export default function SizeSelect({ setUserChoice, userChoice }) {
 
     return (
         <span className="relative">
-            <div ref={dropdownRef} onClick={() => setIsOpen(!isOpen)} className="text-blue-200">
+            <div ref={dropdownRef} onClick={() => setIsOpen(!isOpen)}>
                 <button className="flex items-center gap-4 px-4 py-3 rounded-md bg-[#F3F3F3] cursor-pointer">
                     {userChoice.size ? userChoice.size : sizeOptions[0]}
                     <motion.span animate={{ rotate: isOpen ? 180 : 0 }}>
@@ -66,7 +66,7 @@ export default function SizeSelect({ setUserChoice, userChoice }) {
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -20, opacity: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute left-0 bg-[#F3F3F3] w-full shadow-lg border border-blue-200/20 rounded-lg mt-2 z-10">
+                            className="absolute left-0 bg-[#F3F3F3] w-full shadow-lg border border-oBlue-200/20 rounded-lg mt-2 z-10">
                             {sizeOptions.map(size => (
                                 <li
                                     key={size}
@@ -77,7 +77,7 @@ export default function SizeSelect({ setUserChoice, userChoice }) {
                                         }));
                                         setIsOpen(false);
                                     }}
-                                    className="cursor-pointer px-3 py-2 hover:bg-blue-100/15"
+                                    className="cursor-pointer px-3 py-2 hover:bg-oBlue-100/15"
                                 >
                                     {size}
                                 </li>
