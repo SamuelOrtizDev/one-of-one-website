@@ -6,6 +6,7 @@ import Image from "next/image";
 import dave from "./assets/dave.webp"
 import anna from "./assets/anna.webp"
 import viviana from "./assets/viviana.webp"
+import samuelOrtiz from "./assets/samuelOrtiz.webp"
 import citybg from "./assets/cityBg.webp"
 
 const teamMembers = [
@@ -28,7 +29,7 @@ const teamMembers = [
         role: 'Paid Ads Specialist'
     },
     {
-        picture: viviana,
+        picture: samuelOrtiz,
         first: 'Samuel',
         last: 'Ortiz',
         role: 'Web Developer'
