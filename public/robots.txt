@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Bloquear directorios privados o de sistema
+Disallow: /api/
+Disallow: /_next/
