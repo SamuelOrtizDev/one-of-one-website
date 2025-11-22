@@ -13,7 +13,7 @@ export function CuriousAboutCourse() {
                 <motion.h2 {...fadeInUp} className="text-3xl md:text-5xl">Curious About the <span className="px-2 py-2 text-white font-bold bg-oBlue-200">Course?</span></motion.h2>
                 <motion.p {...fadeInUp}>Enterperneurial Masterclas</motion.p>
                 <motion.span {...fadeInUp} className="mt-4">
-                    <PrimaryCTA label={"See it for youself"} href="https://www.guttmanmedia.com/anti-MBA" />
+                    <PrimaryCTA label={"See it for youself"} href="https://www.guttmanmedia.com/anti-MBA" trackEvent="ANTI-MBA Course" />
                 </motion.span>
             </div>
 

@@ -42,7 +42,7 @@ export default function Navbar() {
                 </nav>
 
                 <nav className="hidden nav:flex gap-8 w-full justify-end max-w-xs">
-                    <SecondaryCTA />
+                    <SecondaryCTA trackEvent="Navbar CTA - Custom Poster" />
                 </nav>
 
                 <nav className="nav:hidden">
@@ -57,7 +57,7 @@ export default function Navbar() {
                     isOpen &&
                     <div className="flex flex-col items-center gap-8 basis-full my-8">
                         <NavLinks />
-                        <SecondaryCTA />
+                        <SecondaryCTA trackEvent="Navbar CTA - Custom Poster" />
                     </div>
                 }
             </div>

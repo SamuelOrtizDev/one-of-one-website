@@ -118,7 +118,7 @@ export function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.8 }}
                 >
-                    <PrimaryCTA label={"Start Creating Your Poster Now"} />
+                    <PrimaryCTA label={"Start Creating Your Poster Now"} trackEvent='Landing Hero - Custom Poster CTA' />
                 </motion.span>
             </SectionLayout>
         </>
