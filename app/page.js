@@ -70,13 +70,13 @@ export default function Home() {
     <>
       <Hero />
       <InspirationForEveryDay />
-      <HowItWorks />
-      <UniqueStories />
-      <ReadyToCreate />
       <Finishes />
+      <UniqueStories />
       <Faq />
       <StillHaveQuestions/>
       <GetStarted/>
+      {/* <HowItWorks />
+      <ReadyToCreate /> */}
     </>
   );
 }
