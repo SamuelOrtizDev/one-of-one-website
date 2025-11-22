@@ -2,8 +2,8 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/common/Navbar/Navbar";
 import Footer from "@/components/common/Footer/Footer";
-import { PopUp } from "@/components/common/PopUp/PopUp";
 import CrispChat from "@/components/common/CrispChat";
+import { Analytics } from "@vercel/analytics/next"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -22,6 +22,7 @@ export default function RootLayout({ children }) {
         </main>
         <Footer/>
         <CrispChat/>
+        <Analytics/>
       </body>
     </html>
   );
